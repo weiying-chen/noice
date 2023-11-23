@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <Slider min={0} max={20} defaultValue={3} />
+      <Slider min={0} max={100} defaultValue={3} />
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -45,7 +45,7 @@ function App() {
             <Slider
               className="slider-1"
               min={0}
-              max={20}
+              max={100}
               step={1}
               value={sliderValue1}
               onChange={(newValue) => setSliderValue1(newValue)}
@@ -57,7 +57,7 @@ function App() {
             <Slider
               className="slider-2"
               min={0}
-              max={20}
+              max={100}
               step={1}
               value={sliderValue2}
               onChange={(newValue) => setSliderValue2(newValue)}
@@ -69,7 +69,7 @@ function App() {
             <Slider
               className="slider-3"
               min={0}
-              max={20}
+              max={100}
               step={1}
               value={sliderValue3}
               onChange={(newValue) => setSliderValue3(newValue)}
