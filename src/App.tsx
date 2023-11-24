@@ -23,17 +23,22 @@ function App() {
     setSliderValue1(newValue);
 
     if (audioRef.current) {
-      // The volume property of the <audio> element accepts values ranging from 0.0 to 1.0
+      // `<audio>`'s `volume` property accepts values ranging from 0.0 to 1.0
       audioRef.current.volume = newValue / 100;
     }
   };
 
- useEffect(() => {
+  useEffect(() => {
     // Set initial volume when the component mounts
     if (audioRef.current) {
       audioRef.current.volume = sliderValue1 / 100;
+
+      // Mimic autoPlay
+      audioRef.current.play(); 
+      audioRef.current.loop = true;
     }
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+  // The empty array ensures this effect runs only once on mount
+  }, []); 
 
   return (
     <>
