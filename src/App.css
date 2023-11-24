@@ -38,10 +38,6 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
 .sliders-container {
   display: flex;
 }
@@ -111,6 +107,12 @@
   box-shadow: 0 0 5px #222;
 }
 
+
+.rc-slider-handle:focus-visible {
+  border-color: #222;
+  box-shadow: 0 0 5px #222;
+}
+
 /* Using the :before pseudo-element to add the Font Awesome icon */
 .rc-slider-handle:before {
   font-family: "Font Awesome 5 Free"; /* Font family for Font Awesome 5 Free */
@@ -141,8 +143,3 @@
 .rc-slider-vertical .rc-slider-step {
     width: 12px;
 }
-
-.read-the-docs {
-  color: #888;
-}
-
