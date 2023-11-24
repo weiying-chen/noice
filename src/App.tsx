@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './App.css';
@@ -27,6 +27,13 @@ function App() {
       audioRef.current.volume = newValue / 100;
     }
   };
+
+ useEffect(() => {
+    // Set initial volume when the component mounts
+    if (audioRef.current) {
+      audioRef.current.volume = sliderValue1 / 100;
+    }
+  }, []); // Empty dependency array ensures this effect runs only once on mount
 
   return (
     <>
