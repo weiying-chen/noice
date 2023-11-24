@@ -3,15 +3,6 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './App.css';
 
-const handleWithIcon = (node, props) => {
-  return (
-    <div className="custom-handle">
-      <FontAwesomeIcon icon={faCoffee} />
-      {node}
-    </div>
-  );
-};
-
 function App() {
   const [count, setCount] = useState(0);
   const [sliderValue1, setSliderValue1] = useState(1);
