@@ -1,84 +1,65 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
+const audioSources = [
+  { src: '/fire.mp3', unicode: '\\f73d' },
+  { src: '/crickets.mp3', unicode: '\\f06d' },
+  // Add more sources as needed
+];
+
 function App() {
-  const [count, setCount] = useState(0);
-  const [sliderValue1, setSliderValue1] = useState(1);
-  const [sliderValue2, setSliderValue2] = useState(1);
-  const [sliderValue3, setSliderValue3] = useState(1);
-  const audioRef = useRef(null);
+  const [sliderValues, setSliderValues] = useState(
+    audioSources.map(() => 1)
+  );
 
-  const handleSliderChange = (newValue) => {
-    setSliderValue1(newValue);
+  const audioRefs = audioSources.map(() => useRef(null));
 
-    if (audioRef.current) {
-      // `<audio>`'s `volume` property accepts values ranging from 0.0 to 1.0
-      audioRef.current.volume = newValue / 100;
+  const handleSliderChange = (index, newValue) => {
+    setSliderValues((prevValues) =>
+      prevValues.map((value, i) => (i === index ? newValue : value))
+    );
+
+    if (audioRefs[index].current) {
+      audioRefs[index].current.volume = newValue / 100;
     }
   };
 
-  useEffect(() => {
-    // Set initial volume when the component mounts
-    if (audioRef.current) {
-      audioRef.current.volume = sliderValue1 / 100;
-
-      // Mimic autoPlay
-      audioRef.current.play(); 
-      audioRef.current.loop = true;
-    }
-  // The empty array ensures this effect runs only once on mount
-  }, []); 
-
   return (
     <>
-      <div className="audio-controls">
-        <audio ref={audioRef} controls>
-          <source src="/fire.mp3" type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div className="sliders-container">
-        <div className="slider-wrapper">
-          <Slider
-            className="slider-1"
-            min={0}
-            max={100}
-            step={1}
-            value={sliderValue1}
-            onChange={handleSliderChange}
-            vertical
-          />
-          <p>{sliderValue1}%</p>
+      {audioSources.map((source, index) => (
+        <div key={index} className="noise">
+          <audio controls ref={audioRefs[index]}>
+            <source src={source.src} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <div className="slider-wrapper">
+            <Slider
+              className={`slider-${index}`} // Unique class name for each slider
+              min={0}
+              max={100}
+              step={1}
+              value={sliderValues[index]}
+              onChange={(newValue) => handleSliderChange(index, newValue)}
+              vertical
+            />
+            <style>
+              {`
+                .slider-${index} .rc-slider-handle:before {
+                  content: "${source.unicode}";
+                  font-family: 'Font Awesome 5 Free';
+                }
+              `}
+            </style>
+            <p>{sliderValues[index]}%</p>
+          </div>
         </div>
-        <div className="slider-wrapper">
-          <Slider
-            className="slider-2"
-            min={0}
-            max={100}
-            step={1}
-            value={sliderValue2}
-            onChange={(newValue) => setSliderValue2(newValue)}
-            vertical // Set the slider to vertical
-          />
-          <p>{sliderValue2}%</p>
-        </div>
-        <div className="slider-wrapper">
-          <Slider
-            className="slider-3"
-            min={0}
-            max={100}
-            step={1}
-            value={sliderValue3}
-            onChange={(newValue) => setSliderValue3(newValue)}
-            vertical // Set the slider to vertical
-          />
-          <p>{sliderValue3}%</p>
-        </div>
-      </div>
+      ))}
     </>
   );
 }
 
-export default App
+export default App;
