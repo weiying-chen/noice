@@ -4,8 +4,8 @@ import 'rc-slider/assets/index.css';
 import './App.css';
 
 const audioSources = [
-  { src: '/fire.mp3', unicode: '\\f73d' },
-  { src: '/crickets.mp3', unicode: '\\f06d' },
+  { src: '/fire.mp3', icon: '\\f73d' },
+  { src: '/crickets.mp3', icon: '\\f06d' },
   // Add more sources as needed
 ];
 
@@ -47,7 +47,7 @@ function App() {
             <style>
               {`
                 .slider-${index} .rc-slider-handle:before {
-                  content: "${source.unicode}";
+                  content: "${source.icon}";
                   font-family: 'Font Awesome 5 Free';
                 }
               `}
