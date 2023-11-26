@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './App.css';
@@ -29,6 +29,32 @@ function App() {
       audioRefs[index].current.volume = newValue / 100;
     }
   };
+
+  const handleControlClick = (index) => {
+    if (index === 0) {
+      audioRefs.forEach((audioRef) => {
+        if (audioRef.current) {
+          audioRef.current.play();
+        }
+      });
+    } else {
+      console.log('else');
+    }
+  };
+
+  useEffect(() => {
+    audioRefs.forEach((audioRef, index) => {
+      const defaultSliderValue = 50;
+
+      setSliderValues((prevValues) =>
+        prevValues.map(() => defaultSliderValue)
+      );
+
+      if (audioRef.current) {
+        audioRef.current.volume = defaultSliderValue / 100;
+      }
+    });
+  }, []); 
 
   return (
     <>
@@ -64,7 +90,7 @@ function App() {
       <div className="controls">
         {controls.map((control, index) => (
           <div key={index} className={`control-${index}`}>
-            <button key={index} />
+            <button onClick={() => handleControlClick(index)} />
             <style>
               {`
                 .control-${index} button:before {
