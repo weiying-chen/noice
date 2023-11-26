@@ -3,18 +3,17 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './App.css';
 
-const audioSources = [
+const audios = [
   { src: '/fire.mp3', icon: '\\f73d' },
   { src: '/crickets.mp3', icon: '\\f06d' },
-  // Add more sources as needed
 ];
 
 function App() {
   const [sliderValues, setSliderValues] = useState(
-    audioSources.map(() => 1)
+    audios.map(() => 1)
   );
 
-  const audioRefs = audioSources.map(() => useRef(null));
+  const audioRefs = audios.map(() => useRef(null));
 
   const handleSliderChange = (index, newValue) => {
     setSliderValues((prevValues) =>
@@ -28,10 +27,10 @@ function App() {
 
   return (
     <>
-      {audioSources.map((source, index) => (
+      {audios.map((audio, index) => (
         <div key={index} className="noise">
           <audio controls ref={audioRefs[index]}>
-            <source src={source.src} type="audio/mpeg" />
+            <source src={audio.src} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
           <div className="slider-wrapper">
@@ -47,7 +46,7 @@ function App() {
             <style>
               {`
                 .slider-${index} .rc-slider-handle:before {
-                  content: "${source.icon}";
+                  content: "${audio.icon}";
                   font-family: 'Font Awesome 5 Free';
                 }
               `}
