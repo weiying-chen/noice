@@ -9,8 +9,8 @@ const audios = [
 ];
 
 const controls = [
-  { text: 'Play', icon: '\\f73d' },
-  { text: 'Reset', icon: '\\f06d' },
+  { icon: '\\f04b' },
+  { icon: '\\f06d' },
 ];
 
 function App() {
@@ -64,10 +64,10 @@ function App() {
       <div className="controls">
         {controls.map((control, index) => (
           <div key={index} className={`control-${index}`}>
-            <button key={index} className={`control-handle`}>{control.text}</button>
+            <button key={index} />
             <style>
               {`
-                .control-${index} .control-handle:before {
+                .control-${index} button:before {
                   content: "${control.icon}";
                 }
               `}
