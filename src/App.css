@@ -113,3 +113,8 @@
 .rc-slider-vertical .rc-slider-step {
     width: 12px;
 }
+
+.control-handle:before {
+  font-family: "Font Awesome 5 Free"; /* Font family for Font Awesome 5 Free */
+  font-weight: 900;
+}
