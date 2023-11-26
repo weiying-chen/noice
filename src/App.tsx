@@ -26,10 +26,10 @@ function App() {
   };
 
   return (
-    <>
+    <div className="audios">
       {audios.map((audio, index) => (
-        <div key={index} className="noise">
-          <audio controls ref={audioRefs[index]}>
+        <div key={index} className="audio">
+          <audio ref={audioRefs[index]}>
             <source src={audio.src} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
@@ -55,7 +55,7 @@ function App() {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
