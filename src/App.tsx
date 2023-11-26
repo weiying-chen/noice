@@ -71,7 +71,7 @@ function App() {
       <div className="audios">
         {audios.map((audio, index) => (
           <div key={index} className="audio">
-            <audio ref={audioRefs[index]}>
+            <audio ref={audioRefs[index]} loop>
               <source src={audio.src} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
