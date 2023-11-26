@@ -9,8 +9,8 @@ const audios = [
 ];
 
 const controls = [
-  { icon: '\\f04b' },
-  { icon: '\\f06d' },
+  { name: "Play", icon: '\\f04b', toggledIcon: '\\f04c'},
+  { name: "Reset", icon: '\\f06d' },
 ];
 
 function App() {
@@ -104,7 +104,9 @@ function App() {
             <style>
               {`
                 .control-${index} button:before {
-                  content: "${control.icon}";
+                  content: "${index === 0 && isPlaying
+                    ? controls[index].toggledIcon
+                    : controls[index].icon}";
                 }
               `}
             </style>
