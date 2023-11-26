@@ -131,9 +131,14 @@
   border-radius: 50%;
   color: #fff;
   padding: 0;
+  outline: none !important;
   position: relative;
   width: 38px;
   height: 38px;
+}
+
+[class^="control-"] button:hover {
+  border-color: #222;
 }
 
 [class^="control-"] button:before {
