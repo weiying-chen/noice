@@ -15,7 +15,7 @@ const controls = [
 
 function App() {
   const [sliderValues, setSliderValues] = useState(audios.map(() => 1));
-  const [isPlaying, setIsPlaying] = useState(false); // State to manage play/pause
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const audioRefs = audios.map(() => useRef(null));
 
   const handleSliderChange = (index, newValue) => {
@@ -30,14 +30,14 @@ function App() {
 
   const handleControlClick = (index) => {
     if (index === 0) {
-      if (!isPlaying) {
+      if (!isAudioPlaying) {
         audioRefs.forEach((audioRef) => {
           if (audioRef.current) {
             audioRef.current.play();
           }
         });
 
-        setIsPlaying(true);
+        setIsAudioPlaying(true);
       } else {
         audioRefs.forEach((audioRef) => {
           if (audioRef.current) {
@@ -45,7 +45,7 @@ function App() {
           }
         });
 
-        setIsPlaying(false);
+        setIsAudioPlaying(false);
       }
     } else {
       console.log('else');
@@ -104,7 +104,7 @@ function App() {
             <style>
               {`
                 .control-${index} button:before {
-                  content: "${index === 0 && isPlaying
+                  content: "${index === 0 && isAudioPlaying
                     ? controls[index].toggledIcon
                     : controls[index].icon}";
                 }
