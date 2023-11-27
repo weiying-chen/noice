@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import useAudioControl from './hooks/useAudioControl';
+import useSliderChange from './hooks/useSliderChange';
 import Slider from 'rc-slider';
 import Control from './components/Control';
 
@@ -79,6 +80,7 @@ function App() {
       <div className="controls">
         {controls.map((control, index) => (
           <Control
+            key={index}
             index={index}
             onClick={() => handleControlClick(index)}
             icon={
