@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Slider from 'rc-slider';
 
-const AudioSlider = styled(Slider)`
+const StyledSlider = styled(Slider)`
   height: 250px;
 
   &.rc-slider-vertical {
@@ -61,6 +61,7 @@ const AudioSlider = styled(Slider)`
   }
 
   .rc-slider-handle:before {
+    content: ${(props) => `"${props.$icon}"`};
     font-family: "Font Awesome 5 Free"; /* Font family for Font Awesome 5 Free */
     font-weight: 900;
     position: absolute;
@@ -69,5 +70,19 @@ const AudioSlider = styled(Slider)`
     transform: translate(-50%, -50%); /* Center the icon */
   }
 `;
+
+function AudioSlider({ min, max, step, value, onChange, icon, vertical}) {
+  return (
+    <StyledSlider
+      min={min}
+      max={max}
+      step={step}
+      value={value}
+      onChange={onChange}
+      $icon={icon}
+      {...(vertical ? { vertical } : {})}
+    />
+  );
+};
 
 export default AudioSlider;

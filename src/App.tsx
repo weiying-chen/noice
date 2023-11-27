@@ -40,21 +40,14 @@ function App() {
             </audio>
             <div className="slider-wrapper">
               <AudioSlider
-                className={`slider-${index}`}
                 min={0}
                 max={100}
                 step={1}
                 value={sliderValues[index]}
                 onChange={(newValue) => handleSliderChange(index, newValue)}
+                icon={audio.icon}
                 vertical
               />
-              <style>
-                {`
-                  .slider-${index} .rc-slider-handle:before {
-                    content: "${audio.icon}";
-                  }
-                `}
-              </style>
               <p>{sliderValues[index]}%</p>
             </div>
           </div>
