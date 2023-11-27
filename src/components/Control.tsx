@@ -5,6 +5,7 @@ const Button = styled.button`
   border: solid 2px #555;
   border-radius: 50%;
   color: #fff;
+  margin: 0 5px;
   padding: 0;
   outline: none !important;
   position: relative;
@@ -29,9 +30,7 @@ const Button = styled.button`
 
 function Control({ index, onClick, icon}) {
   return (
-    <div key={index}>
-      <Button onClick={onClick} icon={icon} />
-    </div>
+    <Button onClick={onClick} icon={icon} />
   );
 };
 

@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
+import AudioSlider from './components/AudioSlider';
+import Control from './components/Control';
 import useAudio from './hooks/useAudio';
 import useSlider from './hooks/useSlider';
-import Slider from 'rc-slider';
-import Control from './components/Control';
-
 import 'rc-slider/assets/index.css';
 import './App.css';
 
@@ -40,7 +39,7 @@ function App() {
               Your browser does not support the audio element.
             </audio>
             <div className="slider-wrapper">
-              <Slider
+              <AudioSlider
                 className={`slider-${index}`}
                 min={0}
                 max={100}
@@ -55,7 +54,6 @@ function App() {
                     content: "${audio.icon}";
                   }
                 `}
-
               </style>
               <p>{sliderValues[index]}%</p>
             </div>
