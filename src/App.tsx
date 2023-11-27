@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Slider from 'rc-slider';
+import Control from './Control';
 import 'rc-slider/assets/index.css';
 import './App.css';
 
@@ -77,7 +78,7 @@ function App() {
             </audio>
             <div className="slider-wrapper">
               <Slider
-                className={`slider-${index}`} // Unique class name for each slider
+                className={`slider-${index}`}
                 min={0}
                 max={100}
                 step={1}
@@ -99,18 +100,15 @@ function App() {
       </div>
       <div className="controls">
         {controls.map((control, index) => (
-          <div key={index} className={`control-${index}`}>
-            <button onClick={() => handleControlClick(index)} />
-            <style>
-              {`
-                .control-${index} button:before {
-                  content: "${index === 0 && isAudioPlaying
-                    ? controls[index].toggledIcon
-                    : controls[index].icon}";
-                }
-              `}
-            </style>
-          </div>
+          <Control
+            index={index}
+            onClick={() => handleControlClick(index)}
+            icon={
+              index === 0 && isAudioPlaying
+                ? control.toggledIcon
+                : control.icon
+            }
+          />
         ))}
       </div>
     </>
