@@ -13,7 +13,7 @@ const Button = styled.button`
   height: 38px;
 
   &::before {
-    content: ${(props) => `"${props.icon}"`};
+    content: ${(props) => `"${props.$icon}"`};
     font-family: "Font Awesome 5 Free"; /* Font family for Font Awesome 5 Free */
     font-size: 1.2em;
     font-weight: 900;
@@ -30,7 +30,7 @@ const Button = styled.button`
 
 function Control({ index, onClick, icon}) {
   return (
-    <Button onClick={onClick} icon={icon} />
+    <Button onClick={onClick} $icon={icon} />
   );
 };
 
