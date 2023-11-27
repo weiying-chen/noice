@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import useAudioControl from './hooks/useAudioControl';
-import useSliderChange from './hooks/useSliderChange';
+import useAudio from './hooks/useAudio';
+import useSlider from './hooks/useSlider';
 import Slider from 'rc-slider';
 import Control from './components/Control';
 
@@ -18,33 +18,9 @@ const controls = [
 ];
 
 function App() {
-  const [sliderValues, setSliderValues] = useState(audios.map(() => 1));
   const audioRefs = audios.map(() => useRef(null));
-  const { isAudioPlaying, handleControlClick } = useAudioControl(audioRefs);
-
-  const handleSliderChange = (index, newValue) => {
-    setSliderValues((prevValues) =>
-      prevValues.map((value, i) => (i === index ? newValue : value))
-    );
-
-    if (audioRefs[index].current) {
-      audioRefs[index].current.volume = newValue / 100;
-    }
-  };
-
-  useEffect(() => {
-    audioRefs.forEach((audioRef, index) => {
-      const defaultSliderValue = 50;
-
-      setSliderValues((prevValues) =>
-        prevValues.map(() => defaultSliderValue)
-      );
-
-      if (audioRef.current) {
-        audioRef.current.volume = defaultSliderValue / 100;
-      }
-    });
-  }, []); 
+  const { sliderValues, handleSliderChange} = useSlider(audios, audioRefs);
+  const { isAudioPlaying, handleControlClick } = useAudio(audioRefs);
 
   return (
     <>

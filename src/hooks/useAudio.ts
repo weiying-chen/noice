@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-function useAudioControl(audioRefs) {
+function useAudio(audioRefs) {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   function handleControlClick() {
@@ -24,4 +24,4 @@ function useAudioControl(audioRefs) {
   return { isAudioPlaying, handleControlClick };
 }
 
-export default useAudioControl;
+export default useAudio;
