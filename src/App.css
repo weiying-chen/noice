@@ -124,29 +124,3 @@
 [class^="control-"] {
   margin: 0 5px;
 }
-
- [class^="control-"] button {
-  background: #e3b0c8;
-  border: solid 2px #555;
-  border-radius: 50%;
-  color: #fff;
-  padding: 0;
-  outline: none !important;
-  position: relative;
-  width: 38px;
-  height: 38px;
-}
-
-[class^="control-"] button:hover {
-  border-color: #222;
-}
-
-[class^="control-"] button:before {
-  font-family: "Font Awesome 5 Free"; /* Font family for Font Awesome 5 Free */
-  font-size: 1.2em;
-  font-weight: 900;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}

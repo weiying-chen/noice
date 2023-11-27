@@ -22,7 +22,7 @@ const defaultSliderValue = 50
 function App() {
   const audioRefs = audios.map(() => useRef(null));
 
-  const { sliderValues, handleSliderChange} = useSlider(
+  const { sliderValues, handleSliderChange } = useSlider(
     audios,
     audioRefs,
     defaultSliderValue
@@ -55,6 +55,7 @@ function App() {
                     content: "${audio.icon}";
                   }
                 `}
+
               </style>
               <p>{sliderValues[index]}%</p>
             </div>
