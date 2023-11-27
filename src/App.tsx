@@ -17,9 +17,11 @@ const controls = [
   { name: "Reset", icon: '\\f06d' },
 ];
 
+const defaultSliderValue = 50
+
 function App() {
   const audioRefs = audios.map(() => useRef(null));
-  const { sliderValues, handleSliderChange} = useSlider(audios, audioRefs);
+  const { sliderValues, handleSliderChange} = useSlider(audios, audioRefs, defaultSliderValue);
   const { isAudioPlaying, handleControlClick } = useAudio(audioRefs);
 
   return (

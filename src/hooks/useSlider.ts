@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
-const useSlider = (audios, audioRefs) => {
+const useSlider = (audios, audioRefs, defaultSliderValue) => {
+  const defaultSliderOr = defaultSliderValue || 1  
   const [sliderValues, setSliderValues] = useState(audios.map(() => 1));
 
   const handleSliderChange = (index, newValue) => {
@@ -15,14 +16,12 @@ const useSlider = (audios, audioRefs) => {
 
   useEffect(() => {
     audioRefs.forEach((audioRef, index) => {
-      const defaultSliderValue = 50;
-
       setSliderValues((prevValues) =>
-        prevValues.map(() => defaultSliderValue)
+        prevValues.map(() => defaultSliderOr)
       );
 
       if (audioRef.current) {
-        audioRef.current.volume = defaultSliderValue / 100;
+        audioRef.current.volume = defaultSliderOr / 100;
       }
     });
   }, []);
