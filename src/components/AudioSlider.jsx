@@ -10,23 +10,23 @@ const StyledSlider = styled(Slider)`
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  &.rc-slider-vertical .rc-slider-rail {
-    width: 12px;
-  }
-
-  &.rc-slider-vertical .rc-slider-track {
-    left: auto;
-    width: 12px;
-  }
-
-  &.rc-slider-vertical .rc-slider-handle {
-    margin-left: 0;
-  }
-
-  &.rc-slider-vertical .rc-slider-step {
+  
+    .rc-slider-rail {
       width: 12px;
+    }
+
+    .rc-slider-track {
+      left: auto;
+      width: 12px;
+    }
+
+    .rc-slider-handle {
+      margin-left: 0;
+    }
+
+    .rc-slider-step {
+        width: 12px;
+    }
   }
 
   .rc-slider-rail {
