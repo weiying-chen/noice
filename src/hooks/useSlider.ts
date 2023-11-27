@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 
-const useSlider = (audios, audioRefs, defaultSliderValue) => {
-  const defaultSliderOr = defaultSliderValue || 1  
+function useSlider(audios, audioRefs, defaultSliderValue) {
+  const defaultSliderOr = defaultSliderValue || 1;
   const [sliderValues, setSliderValues] = useState(audios.map(() => 1));
 
-  const handleSliderChange = (index, newValue) => {
+  function handleSliderChange(index, newValue) {
     setSliderValues((prevValues) =>
       prevValues.map((value, i) => (i === index ? newValue : value))
     );
@@ -12,7 +12,7 @@ const useSlider = (audios, audioRefs, defaultSliderValue) => {
     if (audioRefs[index].current) {
       audioRefs[index].current.volume = newValue / 100;
     }
-  };
+  }
 
   useEffect(() => {
     audioRefs.forEach((audioRef, index) => {
@@ -27,6 +27,6 @@ const useSlider = (audios, audioRefs, defaultSliderValue) => {
   }, []);
 
   return { sliderValues, handleSliderChange };
-};
+}
 
 export default useSlider;

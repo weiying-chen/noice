@@ -21,7 +21,13 @@ const defaultSliderValue = 50
 
 function App() {
   const audioRefs = audios.map(() => useRef(null));
-  const { sliderValues, handleSliderChange} = useSlider(audios, audioRefs, defaultSliderValue);
+
+  const { sliderValues, handleSliderChange} = useSlider(
+    audios,
+    audioRefs,
+    defaultSliderValue
+  );
+
   const { isAudioPlaying, handleControlClick } = useAudio(audioRefs);
 
   return (
