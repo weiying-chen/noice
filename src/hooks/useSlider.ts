@@ -26,7 +26,7 @@ function useSlider(audios, audioRefs, defaultSliderValue) {
     });
   }, []);
 
-  return { sliderValues, handleSliderChange };
+  return { sliderValues, setSliderValues, handleSliderChange };
 }
 
 export default useSlider;
