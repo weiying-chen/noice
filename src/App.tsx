@@ -7,8 +7,13 @@ import 'rc-slider/assets/index.css';
 import './App.css';
 
 const audios = [
-  { src: '/fire.mp3', icon: '\\f73d' },
-  { src: '/crickets.mp3', icon: '\\f06d' },
+  { src: '/fire.mp3', icon: '\\f06d' },
+  { src: '/crickets.mp3', icon: '\\e4d0' },
+  { src: '/birds.mp3', icon: '\\f520' },
+  { src: '/wind.mp3', icon: '\\f72e' },
+  { src: '/rain.mp3', icon: '\\f73d' },
+  { src: '/river.mp3', icon: '\\f773' },
+  { src: '/waves.mp3', icon: '\\f5ca' },
 ];
 
 const controls = [
@@ -27,8 +32,6 @@ function App() {
     audioRefs,
     defaultSliderValue
   );
-
-  // const { isAudioPlaying, handleControlClick } = useAudio(audioRefs);
 
   controls.forEach(control => {
     if (control.name === 'Play') {
