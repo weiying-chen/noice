@@ -18,7 +18,7 @@ const audios = [
 
 const controls = [
   { name: "Play", icon: '\\f04b', toggledIcon: '\\f04c', action: null},
-  { name: "Reset", icon: '\\f06d', action: null },
+  { name: "Reset", icon: '\\f2f9', action: null },
 ];
 
 const defaultSliderValue = 50
