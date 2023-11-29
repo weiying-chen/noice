@@ -19,6 +19,7 @@ const audios = [
 const controls = [
   { name: "Play", icon: '\\f04b', toggledIcon: '\\f04c', action: null},
   { name: "Reset", icon: '\\f2f9', action: null },
+  { name: "Amplify", icon: '\\f028', action: null },
 ];
 
 const defaultSliderValue = 50
@@ -38,6 +39,8 @@ function App() {
       control.action = playAudio;
     } else if (control.name === 'Reset') {
       control.action = resetAudio;
+    } else if (control.name === 'Amplify') {
+      control.action = amplifyAudio;
     }
   });
 
@@ -62,13 +65,28 @@ function App() {
   }
 
   function resetAudio() {
-    audioRefs.forEach((audioRef, index) => {
-      setSliderValues((prevValues) =>
-        prevValues.map(() => defaultSliderValue)
-      );
+    setSliderValues((prevValues) =>
+      prevValues.map(() => defaultSliderValue)
+    );
 
+    audioRefs.forEach((audioRef, index) => {
       if (audioRef.current) {
         audioRef.current.volume = defaultSliderValue / 100;
+      }
+    });
+  }
+
+  function amplifyAudio() {
+    const increasedSliderValue = 20
+
+    setSliderValues((prevValues) => 
+      prevValues.map((prevValue) => prevValue + increasedSliderValue)
+    );
+
+    audioRefs.forEach((audioRef, index) => {
+      if (audioRef.current) {
+        audioRef.current.volume =
+          audioRef.current.volume + (increasedSliderValue / 100);
       }
     });
   }
