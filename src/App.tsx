@@ -65,8 +65,8 @@ function App() {
   }
 
   function resetAudio() {
-    setSliderValues((prevValues) =>
-      prevValues.map(() => defaultSliderValue)
+    setSliderValues((prevSliderValues) =>
+      prevSliderValues.map(() => defaultSliderValue)
     );
 
     audioRefs.forEach((audioRef, index) => {
@@ -79,8 +79,10 @@ function App() {
   function amplifyAudio() {
     const increasedSliderValue = 20
 
-    setSliderValues((prevValues) => 
-      prevValues.map((prevValue) => prevValue + increasedSliderValue)
+    setSliderValues((prevSliderValues) => 
+      prevSliderValues.map((prevSliderValue) => {
+        return prevSliderValue + increasedSliderValue;
+      })
     );
 
     audioRefs.forEach((audioRef, index) => {
