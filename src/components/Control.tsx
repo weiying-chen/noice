@@ -19,7 +19,10 @@ const Button = styled.button`
     font-weight: 900;
     position: absolute;
     top: 50%;
-    left: 50%;
+    /* Offset for Play icon */
+    left: ${(props) => (
+      props.$icon === '\\f04b' ? '54%' : '50%'
+    )};
     transform: translate(-50%, -50%);
   }
 
