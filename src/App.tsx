@@ -26,7 +26,7 @@ const defaultSliderValue = 50
 
 function App() {
   const audioRefs = audios.map(() => useRef(null));
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   const { sliderValues, setSliderValues, handleSliderChange } = useSlider(
     audios,
@@ -45,14 +45,14 @@ function App() {
   });
 
   function playAudio() {
-    if (!isAudioPlaying) {
+    if (!isPlayingAudio) {
       audioRefs.forEach((audioRef) => {
         if (audioRef.current) {
           audioRef.current.play();
         }
       });
 
-      setIsAudioPlaying(true);
+      setIsPlayingAudio(true);
     } else {
       audioRefs.forEach((audioRef) => {
         if (audioRef.current) {
@@ -60,7 +60,7 @@ function App() {
         }
       });
 
-      setIsAudioPlaying(false);
+      setIsPlayingAudio(false);
     }
   }
 
@@ -118,18 +118,12 @@ function App() {
         ))}
       </div>
       <div className="controls">
-        {controls.map((control, index) => (
-          <Control
-            key={index}
-            index={index}
-            onClick={() => control.action()}
-            icon={
-              index === 0 && isAudioPlaying
-                ? control.toggledIcon
-                : control.icon
-            }
-          />
-        ))}
+        <Control
+          onClick={() => playAudio()}
+          icon={isPlayingAudio ? "\\f04c" : "\\f04b"}
+        />
+        <Control onClick={resetAudio} icon="\f2f9" />
+        <Control onClick={amplifyAudio} icon="\f028" />
       </div>
     </>
   );
