@@ -28,9 +28,6 @@ const useAudioPlayer = (audios, options) => {
 
   function playAudio() {
     if (!isPlayingAudio) {
-      if (audioRefs && audioRefs.current[0]) {
-        console.log('volume:', audioRefs.current[0].ref.current.volume);
-      }
       audioRefs.current?.forEach((audioRef) => audioRef.ref.current.play());
       setIsAudioPlaying(true);
     } else {
@@ -58,12 +55,10 @@ const useAudioPlayer = (audios, options) => {
 const defaultSliderValue = 50;
 
 const Audio = forwardRef((props, ref) => {
-  // const { src, icon, ref } = audioRef;
   const { src, icon } = props;
 
   function handleVolumeChange(value) {
     ref.current.volume = value / 100;
-    // ref.current.volume = 1;
   }
 
   return (
