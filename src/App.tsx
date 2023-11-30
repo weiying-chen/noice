@@ -119,7 +119,7 @@ function App() {
       </div>
       <div className="controls">
         <Control
-          onClick={() => playAudio()}
+          onClick={playAudio}
           icon={isPlayingAudio ? "\\f04c" : "\\f04b"}
         />
         <Control onClick={resetAudio} icon="\f2f9" />
