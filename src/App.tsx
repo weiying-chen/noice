@@ -16,12 +16,6 @@ const audios = [
   { src: '/waves.mp3', icon: '\\f5ca' },
 ];
 
-const controls = [
-  { name: "Play", icon: '\\f04b', toggledIcon: '\\f04c', action: null},
-  { name: "Reset", icon: '\\f2f9', action: null },
-  { name: "Amplify", icon: '\\f028', action: null },
-];
-
 const defaultSliderValue = 50
 
 function App() {
@@ -33,16 +27,6 @@ function App() {
     audioRefs,
     defaultSliderValue
   );
-
-  controls.forEach(control => {
-    if (control.name === 'Play') {
-      control.action = playAudio;
-    } else if (control.name === 'Reset') {
-      control.action = resetAudio;
-    } else if (control.name === 'Amplify') {
-      control.action = amplifyAudio;
-    }
-  });
 
   function playAudio() {
     if (!isPlayingAudio) {
