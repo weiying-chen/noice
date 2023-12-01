@@ -8,12 +8,12 @@ import './App.css';
 
 const audios = [
   { src: '/fire.mp3', icon: '\\f06d' },
-  // { src: '/crickets.mp3', icon: '\\e4d0' },
-  // { src: '/birds.mp3', icon: '\\f520' },
-  // { src: '/wind.mp3', icon: '\\f72e' },
-  // { src: '/rain.mp3', icon: '\\f73d' },
-  // { src: '/river.mp3', icon: '\\f773' },
-  // { src: '/waves.mp3', icon: '\\f5ca' },
+  { src: '/crickets.mp3', icon: '\\e4d0' },
+  { src: '/birds.mp3', icon: '\\f520' },
+  { src: '/wind.mp3', icon: '\\f72e' },
+  { src: '/rain.mp3', icon: '\\f73d' },
+  { src: '/river.mp3', icon: '\\f773' },
+  { src: '/waves.mp3', icon: '\\f5ca' },
 ];
 
 const useAudioPlayer = (audios, options) => {
@@ -65,7 +65,7 @@ const Audio = forwardRef((props, ref) => {
 
   return (
     <div className="audio">
-      <audio ref={ref} loop controls>
+      <audio ref={ref} loop>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
       </audio>
@@ -79,6 +79,7 @@ const Audio = forwardRef((props, ref) => {
           icon={icon}
           vertical
         />
+        <p>{volume}%</p>
       </div>
     </div>
   );
@@ -88,6 +89,12 @@ function App() {
   const { isPlayingAudio, playAudio, resetAudio, audioRefs } = useAudioPlayer(audios, {
     defaultVolume: defaultSliderValue,
   });
+
+  function handleVolumeChange(value) {
+    audioRefs.forEach((audioRef) => {
+      audioRef.current.volume = value / 100;
+    });
+  }
 
   return (
     <>
