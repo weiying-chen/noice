@@ -8,8 +8,8 @@ import './App.css';
 
 const audios = [
   { src: '/fire.mp3', icon: '\\f06d' },
-  { src: '/crickets.mp3', icon: '\\e4d0' },
-  { src: '/birds.mp3', icon: '\\f520' },
+  // { src: '/crickets.mp3', icon: '\\e4d0' },
+  // { src: '/birds.mp3', icon: '\\f520' },
   // { src: '/wind.mp3', icon: '\\f72e' },
   // { src: '/rain.mp3', icon: '\\f73d' },
   // { src: '/river.mp3', icon: '\\f773' },
@@ -56,9 +56,11 @@ const defaultSliderValue = 50;
 
 const Audio = forwardRef((props, ref) => {
   const { src, icon } = props;
+  const [volume, setVolume] = useState(50);
 
   function handleVolumeChange(value) {
     ref.current.volume = value / 100;
+    setVolume(value);
   }
 
   return (
@@ -72,7 +74,7 @@ const Audio = forwardRef((props, ref) => {
           min={0}
           max={100}
           step={1}
-          value={ref.current?.volume}
+          value={volume}
           onChange={handleVolumeChange}
           icon={icon}
           vertical
@@ -83,9 +85,7 @@ const Audio = forwardRef((props, ref) => {
 });
 
 function App() {
-  const { isPlayingAudio, playAudio, resetAudio, audioRefs } =
-
-  useAudioPlayer(audios, {
+  const { isPlayingAudio, playAudio, resetAudio, audioRefs } = useAudioPlayer(audios, {
     defaultVolume: defaultSliderValue,
   });
 
