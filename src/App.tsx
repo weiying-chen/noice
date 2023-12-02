@@ -45,8 +45,8 @@ const useAudio = (audios, options) => {
   }
 
   function handleSliderChange(value, index) {
-    audioRefs.current?.forEach((audioRef) => {
-      if (audioRef.ref.current) {
+    audioRefs.current?.forEach((audioRef, i) => {
+      if (audioRef.ref.current && i === index) {
         audioRef.ref.current.volume = value / 100;
       }
     });
