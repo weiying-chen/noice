@@ -1,5 +1,5 @@
 import { useState, useRef, createRef, forwardRef } from 'react';
-import AudioSlider from './components/AudioSlider';
+import StyledSlider from './components/StyledSlider';
 import Control from './components/Control';
 // import useAudio from './hooks/useAudio';
 import useSlider from './hooks/useSlider';
@@ -75,12 +75,6 @@ const useAudioPlayer = (audios, options) => {
 
 const Audio = forwardRef((props, ref) => {
   const { src, icon, volume, index, handleSliderChange } = props;
-  // const [volume, setVolume] = useState(50);
-
-  // function handleVolumeChange(value) {
-    // ref.current.volume = value / 100;
-    // setVolume(value);
-  // }
 
   return (
     <div className="audio">
@@ -89,13 +83,13 @@ const Audio = forwardRef((props, ref) => {
         not support the audio element.
       </audio>
       <div className="slider-wrapper">
-        <AudioSlider
+        <StyledSlider
           min={0}
           max={100}
           step={1}
           value={volume}
           onChange={(value) => handleSliderChange(value, index)}
-          icon={icon}
+          $icon={icon}
           vertical
         />
         <p>{volume}%</p>
@@ -118,12 +112,6 @@ function App() {
   } = useAudioPlayer(audios, {
     defaultVolume,
   });
-
-  // function handleVolumeChange(value) {
-  //   audioRefs.forEach((audioRef) => {
-  //     audioRef.current.volume = value / 100;
-  //   });
-  // }
 
   return (
     <>

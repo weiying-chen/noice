@@ -71,18 +71,4 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-function AudioSlider({ min, max, step, value, onChange, icon, vertical}) {
-  return (
-    <StyledSlider
-      min={min}
-      max={max}
-      step={step}
-      value={value}
-      onChange={onChange}
-      $icon={icon}
-      {...(vertical ? { vertical } : {})}
-    />
-  );
-};
-
-export default AudioSlider;
+export default StyledSlider;
