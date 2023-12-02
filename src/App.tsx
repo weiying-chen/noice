@@ -1,8 +1,8 @@
-import { useState, useRef, createRef, forwardRef } from 'react';
+import { useState, useEffect, useRef, createRef, forwardRef } from 'react';
 import StyledSlider from './components/StyledSlider';
 import Control from './components/Control';
 // import useAudio from './hooks/useAudio';
-import useSlider from './hooks/useSlider';
+// import useSlider from './hooks/useSlider';
 import 'rc-slider/assets/index.css';
 import './App.css';
 
@@ -11,7 +11,7 @@ const audios = [
   { src: '/crickets.mp3', icon: '\\e4d0' },
 ];
 
-const useAudioPlayer = (audios, options) => {
+const useAudio = (audios, options) => {
   const [isPlayingAudio, setIsAudioPlaying] = useState(false);
   const [volumes, setVolumes] = useState(audios.map((audio) => options.defaultVolume));
 
@@ -52,13 +52,7 @@ const useAudioPlayer = (audios, options) => {
     });
 
     setVolumes(prevVolumes => {
-      return prevVolumes.map((prevVolume, i) => {
-        if (i === index) {
-          return value;
-        } else {
-          return prevVolume;
-        }
-      });
+      return prevVolumes.map((prevVolume, i) => (i === index ? value : prevVolume))
     });
   }
 
@@ -78,7 +72,7 @@ const Audio = forwardRef((props, ref) => {
 
   return (
     <div className="audio">
-      <audio ref={ref} loop>
+      <audio ref={ref} loop controls>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
       </audio>
@@ -109,9 +103,13 @@ function App() {
     volumes,
     setVolumes,
     handleSliderChange,
-  } = useAudioPlayer(audios, {
+  } = useAudio(audios, {
     defaultVolume,
   });
+  
+  useEffect(() => {
+    resetAudio();
+  }, []);
 
   return (
     <>
