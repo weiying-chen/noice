@@ -9,15 +9,11 @@ import './App.css';
 const audios = [
   { src: '/fire.mp3', icon: '\\f06d' },
   { src: '/crickets.mp3', icon: '\\e4d0' },
-  { src: '/birds.mp3', icon: '\\f520' },
-  { src: '/wind.mp3', icon: '\\f72e' },
-  { src: '/rain.mp3', icon: '\\f73d' },
-  { src: '/river.mp3', icon: '\\f773' },
-  { src: '/waves.mp3', icon: '\\f5ca' },
 ];
 
 const useAudioPlayer = (audios, options) => {
   const [isPlayingAudio, setIsAudioPlaying] = useState(false);
+  const [volumes, setVolumes] = useState(audios.map((audio) => options.defaultVolume));
 
   const audioRefs = useRef(
     audios.map((audio) => ({
@@ -38,9 +34,31 @@ const useAudioPlayer = (audios, options) => {
 
   function resetAudio() {
     audioRefs.current?.forEach((audioRef, index) => {
-      if (audioRef.current) {
-        audioRef.current.volume = options.defaultVolume / 100;
+      if (audioRef.ref.current) {
+        audioRef.ref.current.volume = options.defaultVolume / 100;
       }
+    });
+
+    setVolumes(prevVolumes => {
+      return prevVolumes.map(() => defaultVolume);
+    });
+  }
+
+  function handleSliderChange(value, index) {
+    audioRefs.current?.forEach((audioRef) => {
+      if (audioRef.ref.current) {
+        audioRef.ref.current.volume = value / 100;
+      }
+    });
+
+    setVolumes(prevVolumes => {
+      return prevVolumes.map((prevVolume, i) => {
+        if (i === index) {
+          return value;
+        } else {
+          return prevVolume;
+        }
+      });
     });
   }
 
@@ -49,19 +67,20 @@ const useAudioPlayer = (audios, options) => {
     playAudio,
     resetAudio,
     audioRefs: audioRefs.current,
+    volumes,
+    setVolumes,
+    handleSliderChange,
   };
 };
 
-const defaultSliderValue = 50;
-
 const Audio = forwardRef((props, ref) => {
-  const { src, icon } = props;
-  const [volume, setVolume] = useState(50);
+  const { src, icon, volume, index, handleSliderChange } = props;
+  // const [volume, setVolume] = useState(50);
 
-  function handleVolumeChange(value) {
-    ref.current.volume = value / 100;
-    setVolume(value);
-  }
+  // function handleVolumeChange(value) {
+    // ref.current.volume = value / 100;
+    // setVolume(value);
+  // }
 
   return (
     <div className="audio">
@@ -75,7 +94,7 @@ const Audio = forwardRef((props, ref) => {
           max={100}
           step={1}
           value={volume}
-          onChange={handleVolumeChange}
+          onChange={(value) => handleSliderChange(value, index)}
           icon={icon}
           vertical
         />
@@ -85,22 +104,38 @@ const Audio = forwardRef((props, ref) => {
   );
 });
 
+const defaultVolume = 50;
+
 function App() {
-  const { isPlayingAudio, playAudio, resetAudio, audioRefs } = useAudioPlayer(audios, {
-    defaultVolume: defaultSliderValue,
+  const {
+    isPlayingAudio,
+    playAudio,
+    resetAudio,
+    audioRefs,
+    volumes,
+    setVolumes,
+    handleSliderChange,
+  } = useAudioPlayer(audios, {
+    defaultVolume,
   });
 
-  function handleVolumeChange(value) {
-    audioRefs.forEach((audioRef) => {
-      audioRef.current.volume = value / 100;
-    });
-  }
+  // function handleVolumeChange(value) {
+  //   audioRefs.forEach((audioRef) => {
+  //     audioRef.current.volume = value / 100;
+  //   });
+  // }
 
   return (
     <>
       <div className="audios">
         {audioRefs.map((audioRef, index) => (
-          <Audio key={audioRef.src} {...audioRef} />
+          <Audio
+            key={audioRef.src}
+            index={index}
+            {...audioRef}
+            volume={volumes[index]}
+            handleSliderChange={handleSliderChange}
+          />
         ))}
       </div>
       <div className="controls">
