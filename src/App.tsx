@@ -68,11 +68,11 @@ const useAudio = (audios, options) => {
 };
 
 const Audio = forwardRef((props, ref) => {
-  const { src, icon, volume, index, handleSliderChange } = props;
+  const { src, icon, volume, handleSliderChange } = props;
 
   return (
     <div className="audio">
-      <audio ref={ref} loop controls>
+      <audio ref={ref} loop>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
       </audio>
@@ -82,7 +82,7 @@ const Audio = forwardRef((props, ref) => {
           max={100}
           step={1}
           value={volume}
-          onChange={(value) => handleSliderChange(value, index)}
+          onChange={handleSliderChange}
           $icon={icon}
           vertical
         />
@@ -117,10 +117,9 @@ function App() {
         {audioRefs.map((audioRef, index) => (
           <Audio
             key={audioRef.src}
-            index={index}
-            {...audioRef}
             volume={volumes[index]}
-            handleSliderChange={handleSliderChange}
+            handleSliderChange={(value) => handleSliderChange(value, index)}
+            {...audioRef}
           />
         ))}
       </div>
