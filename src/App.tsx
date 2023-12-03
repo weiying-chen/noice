@@ -16,6 +16,14 @@ const useAudio = (audios, options) => {
   const [volumes, setVolumes] = useState(audios.map((audio) => options.defaultVolume));
   const audioRefs = audios.map(() => useRef(null));
 
+  useEffect(() => {
+    volumes.forEach((volume, index) => {
+      if (audioRefs[index].current) {
+        audioRefs[index].current.volume = volume;
+      }
+    });
+  }, [volumes]);
+
   function playAudio() {
     if (!isPlayingAudio) {
       audioRefs.forEach((audioRef) => audioRef.current.play());
@@ -27,22 +35,19 @@ const useAudio = (audios, options) => {
   }
 
   function resetAudio() {
-    audioRefs.forEach((audioRef, index) => {
-      if (audioRef.current) {
-        audioRef.current.volume = options.defaultVolume / 100;
-      }
-    });
+    // audioRefs.forEach((audioRef, index) => {
+    //   if (audioRef.current) {
+    //     audioRef.current.volume = options.defaultVolume;
+    //   }
+    // });
 
     setVolumes(prevVolumes => {
-      return prevVolumes.map(() => defaultVolume);
+      return prevVolumes.map(() => options.defaultVolume);
     });
   }
 
   function handleSliderChange(value, index) {
-    console.log(index);
-    console.log(audioRefs[index]);
-    console.log('==');
-    audioRefs[index].current.volume = value / 100;
+    // audioRefs[index].current.volume = value;
 
     setVolumes(prevVolumes => {
       return prevVolumes.map((prevVolume, i) => (i === index ? value : prevVolume))
@@ -72,8 +77,8 @@ const Audio = forwardRef((props, ref) => {
       <div className="slider-wrapper">
         <StyledSlider
           min={0}
-          max={100}
-          step={1}
+          max={1}
+          step={0.01}
           value={volume}
           onChange={handleSliderChange}
           $icon={icon}
@@ -85,7 +90,7 @@ const Audio = forwardRef((props, ref) => {
   );
 });
 
-const defaultVolume = 50;
+const defaultVolume = 0.5;
 
 function App() {
   const {
