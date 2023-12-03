@@ -14,28 +14,22 @@ const audios = [
 const useAudio = (audios, options) => {
   const [isPlayingAudio, setIsAudioPlaying] = useState(false);
   const [volumes, setVolumes] = useState(audios.map((audio) => options.defaultVolume));
-
-  const audioRefs = useRef(
-    audios.map((audio) => ({
-      ...audio,
-      ref: createRef(),
-    })),
-  );
+  const audioRefs = audios.map(() => useRef(null));
 
   function playAudio() {
     if (!isPlayingAudio) {
-      audioRefs.current?.forEach((audioRef) => audioRef.ref.current.play());
+      audioRefs.forEach((audioRef) => audioRef.current.play());
       setIsAudioPlaying(true);
     } else {
-      audioRefs.current?.forEach((audioRef) => audioRef.ref.current?.pause());
+      audioRefs.forEach((audioRef) => audioRef.current?.pause());
       setIsAudioPlaying(false);
     }
   }
 
   function resetAudio() {
-    audioRefs.current?.forEach((audioRef, index) => {
-      if (audioRef.ref.current) {
-        audioRef.ref.current.volume = options.defaultVolume / 100;
+    audioRefs.forEach((audioRef, index) => {
+      if (audioRef.current) {
+        audioRef.current.volume = options.defaultVolume / 100;
       }
     });
 
@@ -45,7 +39,10 @@ const useAudio = (audios, options) => {
   }
 
   function handleSliderChange(value, index) {
-    audioRefs.current[index].ref.current.volume = value / 100;
+    console.log(index);
+    console.log(audioRefs[index]);
+    console.log('==');
+    audioRefs[index].current.volume = value / 100;
 
     setVolumes(prevVolumes => {
       return prevVolumes.map((prevVolume, i) => (i === index ? value : prevVolume))
@@ -56,7 +53,7 @@ const useAudio = (audios, options) => {
     isPlayingAudio,
     playAudio,
     resetAudio,
-    audioRefs: audioRefs.current,
+    audioRefs,
     volumes,
     setVolumes,
     handleSliderChange,
@@ -110,12 +107,14 @@ function App() {
   return (
     <>
       <div className="audios">
-        {audioRefs.map((audioRef, index) => (
+        {audios.map((audio, index) => (
           <Audio
-            key={audioRef.src}
+            key={index}
+            src={audio.src}
+            icon={audio.icon}
+            ref={audioRefs[index]}
             volume={volumes[index]}
             handleSliderChange={(value) => handleSliderChange(value, index)}
-            {...audioRef}
           />
         ))}
       </div>
