@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createRef, forwardRef } from 'react';
+import { useState, useEffect, useRef, useCallback, createRef, forwardRef } from 'react';
 import StyledSlider from './components/StyledSlider';
 import Control from './components/Control';
 // import useAudio from './hooks/useAudio';
@@ -60,15 +60,16 @@ const useAudio = (audios, options) => {
 const Audio = forwardRef((props, ref) => {
   const { src, icon, volume, handleSliderChange } = props;
 
-  useEffect(() => {
-    if (ref.current) {
+  const callbackRef = useCallback((node) => {
+    if (node) {
+      ref.current = node
       ref.current.volume = volume;
     }
-  }, [volume, ref]);
+  }, [volume])
 
   return (
     <div className="audio">
-      <audio ref={ref} loop>
+      <audio ref={callbackRef} loop>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
       </audio>
