@@ -23,12 +23,7 @@ body {
   margin: 0 20px;
 }
 
-.slider-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.slider-wrapper p {
+.audio p {
   font-size: 0.8em;
 }
 

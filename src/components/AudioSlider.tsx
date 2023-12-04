@@ -88,18 +88,16 @@ const Audio = forwardRef((props, ref) => {
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
       </audio>
-      <div className="slider-wrapper">
-        <Slider
-          css={style(icon)}
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={handleSliderChange}
-          vertical
-        />
-        <p>{parseInt(volume * 100)}%</p>
-      </div>
+      <Slider
+        css={style(icon)}
+        min={0}
+        max={1}
+        step={0.01}
+        value={volume}
+        onChange={handleSliderChange}
+        vertical
+      />
+      <p>{parseInt(volume * 100)}%</p>
     </div>
   );
 });
