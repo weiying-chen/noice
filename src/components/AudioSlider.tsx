@@ -2,17 +2,8 @@ import { forwardRef, useCallback } from 'react';
 import { css } from '@emotion/react'
 import Slider from 'rc-slider';
 
-const AudioSlider = forwardRef((props, ref) => {
-  const { src, icon, volume, handleSliderChange } = props;
-
-  const callbackRef = useCallback((node) => {
-    if (node) {
-      ref.current = node
-      ref.current.volume = volume;
-    }
-  }, [volume])
-
-  const style = css`
+function style(icon) {
+  return css`
     width: 22px;
     margin: 0 20px;
 
@@ -92,9 +83,21 @@ const AudioSlider = forwardRef((props, ref) => {
       }
     }
   `;
+}
+
+const AudioSlider = forwardRef((props, ref) => {
+  const { src, icon, volume, handleSliderChange } = props;
+
+  const callbackRef = useCallback((node) => {
+    if (node) {
+      ref.current = node
+      ref.current.volume = volume;
+    }
+  }, [volume])
+
 
   return (
-    <div className="audio" css={style}>
+    <div className="audio" css={style(icon)}>
       <audio ref={callbackRef} loop>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 
-function Control({ index, onClick, icon}) {
-  const style = css`
+function style(icon) {
+  return css`
     background: #f1c9e0;
     border: solid 2px #183153;
     border-bottom-width: 2px;
@@ -29,9 +29,11 @@ function Control({ index, onClick, icon}) {
       border-color: #222;
     }
   `;
+}
 
+function Control({ index, onClick, icon}) {
   return (
-    <button css={style} onClick={onClick} />
+    <button css={style(icon)} onClick={onClick} />
   );
 };
 
