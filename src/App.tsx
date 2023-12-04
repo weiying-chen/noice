@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { css, Global } from '@emotion/react'
+import { fgColor } from './styles/base'
 import AudioSlider from './components/AudioSlider';
 import Control from './components/Control';
 import useAudio from './hooks/useAudio';
@@ -20,6 +22,13 @@ const audios = [
 
 const defaultVolume = 0.5;
 
+const styles = css`
+  body {
+    color: ${fgColor};
+    font-family: 'Nunito', sans-serif;
+  }
+`
+
 function App() {
   const {
     audioRefs,
@@ -38,6 +47,7 @@ function App() {
 
   return (
     <>
+      <Global styles={styles} />
       <div className="audios">
         {audios.map((audio, index) => (
           <AudioSlider

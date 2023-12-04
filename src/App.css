@@ -9,11 +9,6 @@
   text-align: center;
 }
 
-body {
-  font-family: 'Nunito', sans-serif; /* Apply Nunito as the default font */
-  color: #183153;
-}
-
 .audios {
   display: flex;
 }
