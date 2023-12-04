@@ -1,7 +1,8 @@
 import { forwardRef, useCallback } from 'react';
+import { css } from '@emotion/react'
 import Slider from 'rc-slider';
 
-const Audio = forwardRef((props, ref) => {
+const AudioSlider = forwardRef((props, ref) => {
   const { src, icon, volume, handleSliderChange } = props;
 
   const callbackRef = useCallback((node) => {
@@ -11,85 +12,94 @@ const Audio = forwardRef((props, ref) => {
     }
   }, [volume])
 
-  const style = (icon) => ({
-    height: '250px',
+  const style = css`
+    width: 22px;
+    margin: 0 20px;
 
-    '&.rc-slider-vertical': {
-      padding: 0,
-      width: 'inherit',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+    p {
+      font-size: 0.8em;
+    }
 
-      '.rc-slider-rail': {
-        width: '12px',
-      },
+    .rc-slider {
+      height: 250px;
 
-      '.rc-slider-track': {
-        left: 'auto',
-        width: '12px',
-      },
+      &.rc-slider-vertical {
+        padding: 0;
+        width: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-      '.rc-slider-handle': {
-        marginLeft: 0,
-      },
+        .rc-slider-rail {
+          width: 12px;
+        }
 
-      '.rc-slider-step': {
-        width: '12px',
-      },
-    },
+        .rc-slider-track {
+          left: auto;
+          width: 12px;
+        }
 
-    '.rc-slider-rail': {
-      backgroundColor: '#ddd',
-    },
+        .rc-slider-handle {
+          margin-left: 0;
+        }
 
-    '.rc-slider-track, .rc-slider-tracks': {
-      backgroundColor: '#bbb',
-    },
+        .rc-slider-step {
+          width: 12px;
+        }
+      }
 
-   '.rc-slider-handle': {
-      backgroundColor: '#ffb4af',
-      border: 'solid 2px #183153',
-      borderBottomWidth: '2px',
-      color: '#183153',
-      opacity: 1,
-      width: '32px',
-      height: '32px',
+      .rc-slider-rail {
+        background-color: #ddd;
+      }
 
-      '&:hover': {
-        borderColor: '#222',
-      },
+      .rc-slider-track,
+      .rc-slider-tracks {
+        background-color: #bbb;
+      }
 
-      '&:focus-visible': {
-        borderColor: '#222',
-        boxShadow: '0 0 5px #222',
-      },
+      .rc-slider-handle {
+        background-color: #ffb4af;
+        border: solid 2px #183153;
+        border-bottom-width: 2px;
+        color: #183153;
+        opacity: 1;
+        width: 32px;
+        height: 32px;
 
-      '&::before': {
-        content: `"${icon}"`,
-        fontFamily: '"Font Awesome 5 Free"',
-        fontWeight: 900,
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-      },
-    },
+        &:hover {
+          border-color: #222;
+        }
 
-    '.rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging': {
-      borderColor: '#222',
-      boxShadow: '0 0 5px #222',
-    },
-  });
+        &:focus-visible {
+          border-color: #222;
+          box-shadow: 0 0 5px #222;
+        }
+
+        &::before {
+          content: "${icon}";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+        border-color: #222;
+        box-shadow: 0 0 5px #222;
+      }
+    }
+  `;
 
   return (
-    <div className="audio">
+    <div className="audio" css={style}>
       <audio ref={callbackRef} loop>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
       </audio>
       <Slider
-        css={style(icon)}
         min={0}
         max={1}
         step={0.01}
@@ -102,4 +112,4 @@ const Audio = forwardRef((props, ref) => {
   );
 });
 
-export default Audio
+export default AudioSlider
