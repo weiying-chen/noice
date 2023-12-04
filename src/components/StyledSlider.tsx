@@ -34,13 +34,14 @@ const StyledSlider = styled(Slider)`
   }
 
   .rc-slider-track, .rc-slider-tracks {
-      background-color: #bbb;
+    background-color: #bbb;
   }
 
   .rc-slider-handle {
-    background-color: #ed9e9a;
-    border: solid 2px #555;
-    color: #fff;
+    background-color: #ffb4af;
+    border: solid 2px #183153;
+    border-bottom-width: 2px;
+    color: #183153;
     opacity: 1;
     width: 32px;
     height: 32px;

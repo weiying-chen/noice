@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background: #e3b0c8;
-  border: solid 2px #555;
+  background: #f1c9e0;
+  border: solid 2px #183153;
+  border-bottom-width: 2px;
   border-radius: 50%;
-  color: #fff;
+  color: #183153;
   margin: 0 5px;
   padding: 0;
   outline: none !important;

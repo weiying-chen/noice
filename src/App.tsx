@@ -16,14 +16,6 @@ const useAudio = (audios, options) => {
   const [volumes, setVolumes] = useState(audios.map((audio) => options.defaultVolume));
   const audioRefs = audios.map(() => useRef(null));
 
-  // useEffect(() => {
-  //   volumes.forEach((volume, index) => {
-  //     if (audioRefs[index].current) {
-  //       audioRefs[index].current.volume = volume;
-  //     }
-  //   });
-  // }, [volumes]);
-
   function playAudio() {
     if (!isPlayingAudio) {
       audioRefs.forEach((audioRef) => audioRef.current.play());

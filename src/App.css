@@ -1,11 +1,17 @@
 /* Import Font Awesome CSS */
 @import "@fortawesome/fontawesome-free/css/all.css";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+body {
+  font-family: 'Nunito', sans-serif; /* Apply Nunito as the default font */
+  color: #183153;
 }
 
 .audios {
@@ -23,8 +29,7 @@
 }
 
 .slider-wrapper p {
-  color: #bbb;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .controls {
