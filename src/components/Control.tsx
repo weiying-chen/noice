@@ -1,5 +1,3 @@
-import { css } from '@emotion/react'
-
 const style = (icon) => ({
   background: '#f1c9e0',
   border: 'solid 2px #183153',

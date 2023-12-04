@@ -1,72 +1,39 @@
-import { useState, useEffect, useRef, createRef } from 'react';
-import { css } from '@emotion/react'
+import { useEffect } from 'react';
 import AudioSlider from './components/AudioSlider';
 import Control from './components/Control';
-// import useAudio from './hooks/useAudio';
-// import useSlider from './hooks/useSlider';
+import useAudio from './hooks/useAudio';
 import 'rc-slider/assets/index.css';
 import './App.css';
 
-const audios = [
-  { src: '/fire.mp3', icon: '\\f06d' },
-  { src: '/crickets.mp3', icon: '\\e4d0' },
-];
-
-const useAudio = (audios, options) => {
-  const [isPlayingAudio, setIsAudioPlaying] = useState(false);
-  const [volumes, setVolumes] = useState(audios.map((audio) => options.defaultVolume));
-  const audioRefs = audios.map(() => useRef(null));
-
-  function playAudio() {
-    if (!isPlayingAudio) {
-      audioRefs.forEach((audioRef) => audioRef.current.play());
-      setIsAudioPlaying(true);
-    } else {
-      audioRefs.forEach((audioRef) => audioRef.current?.pause());
-      setIsAudioPlaying(false);
-    }
-  }
-
-  function resetAudio() {
-    setVolumes(prevVolumes => {
-      return prevVolumes.map(() => options.defaultVolume);
-    });
-  }
-
-  function handleSliderChange(value, index) {
-    setVolumes(prevVolumes => {
-      return prevVolumes.map((prevVolume, i) => (i === index ? value : prevVolume))
-    });
-  }
-
-  return {
-    isPlayingAudio,
-    playAudio,
-    resetAudio,
-    audioRefs,
-    volumes,
-    setVolumes,
-    handleSliderChange,
-  };
+const icons = {
+  play: '\\f04b',
+  pause: '\\f04c',
+  reset: '\\f2f9',
+  fire: '\\f06d',
+  crickets: '\\e4d0',
 };
+
+const audios = [
+  { src: '/fire.mp3', icon: icons.fire },
+  { src: '/crickets.mp3', icon: icons.crickets },
+];
 
 const defaultVolume = 0.5;
 
 function App() {
   const {
-    isPlayingAudio,
-    playAudio,
-    resetAudio,
     audioRefs,
     volumes,
-    setVolumes,
-    handleSliderChange,
+    isPlayingAudio,
+    playAudio,
+    resetVolumes,
+    handleVolumeChange,
   } = useAudio(audios, {
     defaultVolume,
   });
   
   useEffect(() => {
-    resetAudio();
+    resetVolumes();
   }, []);
 
   return (
@@ -79,16 +46,16 @@ function App() {
             icon={audio.icon}
             ref={audioRefs[index]}
             volume={volumes[index]}
-            handleSliderChange={(value) => handleSliderChange(value, index)}
+            handleSliderChange={(value) => handleVolumeChange(value, index)}
           />
         ))}
       </div>
       <div className="controls">
         <Control
           onClick={playAudio}
-          icon={isPlayingAudio ? "\\f04c" : "\\f04b"}
+          icon={isPlayingAudio ? icons.pause : icons.play }
         />
-        <Control onClick={resetAudio} icon="\f2f9" />
+        <Control onClick={resetVolumes} icon={icons.reset} />
       </div>
     </>
   );
