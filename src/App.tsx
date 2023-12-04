@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, useCallback, createRef, forwardRef } from 'react';
-import StyledSlider from './components/StyledSlider';
+import { useState, useEffect, useRef, createRef } from 'react';
+import { css } from '@emotion/react'
+import AudioSlider from './components/AudioSlider';
 import Control from './components/Control';
 // import useAudio from './hooks/useAudio';
 // import useSlider from './hooks/useSlider';
@@ -49,38 +50,6 @@ const useAudio = (audios, options) => {
   };
 };
 
-const Audio = forwardRef((props, ref) => {
-  const { src, icon, volume, handleSliderChange } = props;
-
-  const callbackRef = useCallback((node) => {
-    if (node) {
-      ref.current = node
-      ref.current.volume = volume;
-    }
-  }, [volume])
-
-  return (
-    <div className="audio">
-      <audio ref={callbackRef} loop>
-        <source src={src} type="audio/mpeg" /> Your browser does
-        not support the audio element.
-      </audio>
-      <div className="slider-wrapper">
-        <StyledSlider
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={handleSliderChange}
-          $icon={icon}
-          vertical
-        />
-        <p>{parseInt(volume * 100)}%</p>
-      </div>
-    </div>
-  );
-});
-
 const defaultVolume = 0.5;
 
 function App() {
@@ -104,7 +73,7 @@ function App() {
     <>
       <div className="audios">
         {audios.map((audio, index) => (
-          <Audio
+          <AudioSlider
             key={index}
             src={audio.src}
             icon={audio.icon}
