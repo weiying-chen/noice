@@ -16,13 +16,13 @@ const useAudio = (audios, options) => {
   const [volumes, setVolumes] = useState(audios.map((audio) => options.defaultVolume));
   const audioRefs = audios.map(() => useRef(null));
 
-  useEffect(() => {
-    volumes.forEach((volume, index) => {
-      if (audioRefs[index].current) {
-        audioRefs[index].current.volume = volume;
-      }
-    });
-  }, [volumes]);
+  // useEffect(() => {
+  //   volumes.forEach((volume, index) => {
+  //     if (audioRefs[index].current) {
+  //       audioRefs[index].current.volume = volume;
+  //     }
+  //   });
+  // }, [volumes]);
 
   function playAudio() {
     if (!isPlayingAudio) {
@@ -35,20 +35,12 @@ const useAudio = (audios, options) => {
   }
 
   function resetAudio() {
-    // audioRefs.forEach((audioRef, index) => {
-    //   if (audioRef.current) {
-    //     audioRef.current.volume = options.defaultVolume;
-    //   }
-    // });
-
     setVolumes(prevVolumes => {
       return prevVolumes.map(() => options.defaultVolume);
     });
   }
 
   function handleSliderChange(value, index) {
-    // audioRefs[index].current.volume = value;
-
     setVolumes(prevVolumes => {
       return prevVolumes.map((prevVolume, i) => (i === index ? value : prevVolume))
     });
@@ -68,6 +60,12 @@ const useAudio = (audios, options) => {
 const Audio = forwardRef((props, ref) => {
   const { src, icon, volume, handleSliderChange } = props;
 
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.volume = volume;
+    }
+  }, [volume, ref]);
+
   return (
     <div className="audio">
       <audio ref={ref} loop>
@@ -84,7 +82,7 @@ const Audio = forwardRef((props, ref) => {
           $icon={icon}
           vertical
         />
-        <p>{volume}%</p>
+        <p>{parseInt(volume * 100)}%</p>
       </div>
     </div>
   );
