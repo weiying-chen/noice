@@ -1,12 +1,13 @@
 import { css } from '@emotion/react'
+import { fgColor } from '../styles/base'
 
 function style(icon) {
   return css`
     background: #f1c9e0;
-    border: solid 2px #183153;
+    border: solid 2px ${fgColor};
     border-bottom-width: 2px;
     border-radius: 50%;
-    color: #183153;
+    color: ${fgColor};
     margin: 0 5px;
     padding: 0;
     outline: none !important;

@@ -1,5 +1,6 @@
 import { forwardRef, useCallback } from 'react';
 import { css } from '@emotion/react'
+import { fgColor } from '../styles/base'
 import Slider from 'rc-slider';
 
 function style(icon) {
@@ -50,9 +51,9 @@ function style(icon) {
 
       .rc-slider-handle {
         background-color: #ffb4af;
-        border: solid 2px #183153;
+        border: solid 2px ${fgColor};
         border-bottom-width: 2px;
-        color: #183153;
+        color: ${fgColor};
         opacity: 1;
         width: 32px;
         height: 32px;
