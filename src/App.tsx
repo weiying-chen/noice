@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { css, Global } from '@emotion/react'
-import { fgColor } from './styles/base'
+import { fgColor } from './styles'
 import AudioSlider from './components/AudioSlider';
 import Control from './components/Control';
 import useAudio from './hooks/useAudio';
