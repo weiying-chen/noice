@@ -57,14 +57,9 @@ function style(icon) {
         width: 32px;
         height: 32px;
 
-        &:hover {
-          border-color: #222;
-          box-shadow: 0 0 5px #222;
-        }
-
+        &:hover,
+        /* An example is focusing element with Tab */
         &:focus-visible {
-          border-color: #222;
-          box-shadow: 0 0 5px #222;
           box-shadow: 0 0 5px #222;
         }
 

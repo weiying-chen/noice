@@ -27,6 +27,10 @@ const styles = css`
     color: ${fgColor};
     font-family: 'Nunito', sans-serif;
   }
+
+  button {
+    cursor: pointer;
+  }
 `
 
 function App() {

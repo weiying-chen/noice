@@ -21,12 +21,15 @@ function style(icon) {
       font-weight: 900;
       position: absolute;
       top: 50%;
+      /* The Play icon looks better when it's slightly to the right */
       left: ${icon === '\\f04b' ? '54%' : '50%'};
       transform: translate(-50%, -50%);
     }
 
-    &:hover {
-      border-color: #222;
+    &:hover,
+    /* An example is focusing element with Tab */
+    &:focus-visible {
+      box-shadow: 0 0 5px #222;
     }
   `;
 }
