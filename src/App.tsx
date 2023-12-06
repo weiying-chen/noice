@@ -8,17 +8,19 @@ import useVolume from './hooks/useVolume';
 import 'rc-slider/assets/index.css';
 import './App.css';
 
-const icons = {
+const icon = {
+  bugs: '\\e4d0',
   play: '\\f04b',
   pause: '\\f04c',
-  reset: '\\f026',
   fire: '\\f06d',
-  crickets: '\\e4d0',
+  volumeHigh: '\\f028',
+  volumeLow: '\\f027',
+  volumeOff: '\\f026',
 };
 
 const audios = [
-  { name: 'Fire', src: '/fire.mp3', icon: icons.fire },
-  { name: 'Crickets', src: '/crickets.mp3', icon: icons.crickets },
+  { name: 'Fire', src: '/fire.mp3', icon: icon.fire },
+  { name: 'Crickets', src: '/crickets.mp3', icon: icon.bugs },
 ];
 
 const DEFAULT_VOLUME = 0;
@@ -36,7 +38,13 @@ const styles = css`
 
 function App() {
   const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);
-  const { volumes, handleVolumeChange, resetVolumes } = useVolume(audios, DEFAULT_VOLUME);
+  const {
+    volumes,
+    handleVolumeChange,
+    increaseVolumes,
+    decreaseVolumes,
+    resetVolumes,
+  } = useVolume(audios, DEFAULT_VOLUME);
 
   useEffect(() => {
     resetVolumes();
@@ -57,8 +65,10 @@ function App() {
         ))}
       </div>
       <div className="controls">
-        <Control onClick={playAudio} icon={isPlayingAudio ? icons.pause : icons.play} />
-        <Control onClick={resetVolumes} icon={icons.reset} />
+        <Control onClick={resetVolumes} icon={icon.volumeOff} />
+        <Control onClick={decreaseVolumes} icon={icon.volumeLow} />
+        <Control onClick={increaseVolumes} icon={icon.volumeHigh} />
+        <Control onClick={playAudio} icon={isPlayingAudio ? icon.pause : icon.play} />
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 
-const useAudio = (audios) => {
+function useAudio(audios) {
   const [isPlayingAudio, setIsAudioPlaying] = useState(false);
   const audioRefs = audios.map(() => useRef(null));
 
