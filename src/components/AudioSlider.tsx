@@ -5,11 +5,15 @@ import Slider from 'rc-slider';
 
 function style(icon) {
   return css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 22px;
     margin: 0 20px;
 
     p {
-      font-size: 0.8em;
+      font-size: 0.7em;
+      margin-top: 20px;
     }
 
     .rc-slider {
@@ -83,7 +87,8 @@ function style(icon) {
 }
 
 const AudioSlider = forwardRef((props, ref) => {
-  const { src, icon, volume, handleSliderChange } = props;
+  const { audio, volume, handleSliderChange } = props;
+  const { name, src, icon } = audio; 
 
   const callbackRef = useCallback((node) => {
     if (node) {
@@ -92,6 +97,9 @@ const AudioSlider = forwardRef((props, ref) => {
     }
   }, [volume])
 
+  const audioLabel = volume === 0
+    ? name
+    : `${parseInt(volume * 100)}%`;
 
   return (
     <div className="audio" css={style(icon)}>
@@ -107,7 +115,7 @@ const AudioSlider = forwardRef((props, ref) => {
         onChange={handleSliderChange}
         vertical
       />
-      <p>{parseInt(volume * 100)}%</p>
+      <p>{audioLabel}</p>
     </div>
   );
 });

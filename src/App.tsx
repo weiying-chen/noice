@@ -10,17 +10,17 @@ import './App.css';
 const icons = {
   play: '\\f04b',
   pause: '\\f04c',
-  reset: '\\f2f9',
+  reset: '\\f026',
   fire: '\\f06d',
   crickets: '\\e4d0',
 };
 
 const audios = [
-  { src: '/fire.mp3', icon: icons.fire },
-  { src: '/crickets.mp3', icon: icons.crickets },
+  { name:'Fire', src: '/fire.mp3', icon: icons.fire },
+  { name:'Crickets', src: '/crickets.mp3', icon: icons.crickets },
 ];
 
-const DEFAULT_VOLUME = 0.5;
+const DEFAULT_VOLUME = 0;
 
 const styles = css`
   body {
@@ -56,8 +56,7 @@ function App() {
         {audios.map((audio, index) => (
           <AudioSlider
             key={index}
-            src={audio.src}
-            icon={audio.icon}
+            audio={audio}
             ref={audioRefs[index]}
             volume={volumes[index]}
             handleSliderChange={(value) => handleVolumeChange(value, index)}
