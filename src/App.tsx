@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
-import { css, Global } from '@emotion/react'
-import { fgColor } from './styles'
+import React, { useEffect } from 'react';
+import { css, Global } from '@emotion/react';
+import { fgColor } from './styles';
 import AudioSlider from './components/AudioSlider';
 import Control from './components/Control';
 import useAudio from './hooks/useAudio';
+import useVolume from './hooks/useVolume';
 import 'rc-slider/assets/index.css';
 import './App.css';
 
@@ -16,8 +17,8 @@ const icons = {
 };
 
 const audios = [
-  { name:'Fire', src: '/fire.mp3', icon: icons.fire },
-  { name:'Crickets', src: '/crickets.mp3', icon: icons.crickets },
+  { name: 'Fire', src: '/fire.mp3', icon: icons.fire },
+  { name: 'Crickets', src: '/crickets.mp3', icon: icons.crickets },
 ];
 
 const DEFAULT_VOLUME = 0;
@@ -31,20 +32,12 @@ const styles = css`
   button {
     cursor: pointer;
   }
-`
+`;
 
 function App() {
-  const {
-    audioRefs,
-    volumes,
-    isPlayingAudio,
-    playAudio,
-    resetVolumes,
-    handleVolumeChange,
-  } = useAudio(audios, {
-    defaultVolume: DEFAULT_VOLUME,
-  });
-  
+  const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);
+  const { volumes, handleVolumeChange, resetVolumes } = useVolume(audios, DEFAULT_VOLUME);
+
   useEffect(() => {
     resetVolumes();
   }, []);
@@ -64,10 +57,7 @@ function App() {
         ))}
       </div>
       <div className="controls">
-        <Control
-          onClick={playAudio}
-          icon={isPlayingAudio ? icons.pause : icons.play }
-        />
+        <Control onClick={playAudio} icon={isPlayingAudio ? icons.pause : icons.play} />
         <Control onClick={resetVolumes} icon={icons.reset} />
       </div>
     </>
