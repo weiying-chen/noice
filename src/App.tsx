@@ -20,7 +20,7 @@ const audios = [
   { src: '/crickets.mp3', icon: icons.crickets },
 ];
 
-const defaultVolume = 0.5;
+const DEFAULT_VOLUME = 0.5;
 
 const styles = css`
   body {
@@ -42,7 +42,7 @@ function App() {
     resetVolumes,
     handleVolumeChange,
   } = useAudio(audios, {
-    defaultVolume,
+    defaultVolume: DEFAULT_VOLUME,
   });
   
   useEffect(() => {
