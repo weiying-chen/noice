@@ -38,6 +38,7 @@ const styles = css`
 
 function App() {
   const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);
+
   const {
     volumes,
     handleVolumeChange,
@@ -65,10 +66,13 @@ function App() {
         ))}
       </div>
       <div className="controls">
-        <Control onClick={resetVolumes} icon={icon.volumeOff} />
         <Control onClick={decreaseVolumes} icon={icon.volumeLow} />
+        <Control
+          onClick={playAudio}
+          icon={isPlayingAudio ? icon.pause : icon.play}
+          big
+        />
         <Control onClick={increaseVolumes} icon={icon.volumeHigh} />
-        <Control onClick={playAudio} icon={isPlayingAudio ? icon.pause : icon.play} />
       </div>
     </>
   );

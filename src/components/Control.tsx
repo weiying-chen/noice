@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { fgColor } from '../styles'
 
-function style(icon) {
+function style(icon, big) {
   return css`
     background: #f1c9e0;
     border: solid 2px ${fgColor};
@@ -11,13 +11,13 @@ function style(icon) {
     padding: 0;
     outline: none !important;
     position: relative;
-    width: 38px;
-    height: 38px;
+    width: ${big ? '46px' : '38px'};
+    height: ${big ? '46px' : '38px'};
 
     &::before {
       content: "${icon}";
       font-family: "Font Awesome 5 Free";
-      font-size: 1.2em;
+      font-size: ${big ? '1.7em' : '1.4em'};
       font-weight: 900;
       position: absolute;
       top: 50%;
@@ -34,9 +34,9 @@ function style(icon) {
   `;
 }
 
-function Control({ index, onClick, icon}) {
+function Control({ index, onClick, icon, big }) {
   return (
-    <button css={style(icon)} onClick={onClick} />
+    <button css={style(icon, big)} onClick={onClick} />
   );
 };
 
