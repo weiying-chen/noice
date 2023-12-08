@@ -1,9 +1,9 @@
-import { forwardRef, useCallback } from 'react';
+import { ForwardedRef, MutableRefObject, forwardRef, useCallback, useRef } from 'react';
 import { css } from '@emotion/react'
 import { fgColor } from '../styles'
 import Slider from 'rc-slider';
 
-function style(icon: any) {
+function style(icon: string) {
   return css`
     display: flex;
     flex-direction: column;
@@ -86,20 +86,26 @@ function style(icon: any) {
   `;
 }
 
-const AudioSlider = forwardRef<HTMLAudioElement, any>(
-  (props: any, ref) => {
+interface Audio {
+  name: string;
+  src: string;
+  icon: string;
+}
+
+interface Props {
+  audio: Audio;
+  volume: number;
+  handleSliderChange: (value: number | number[]) => void;
+}
+
+const AudioSlider = forwardRef(
+  (props: Props, ref: ForwardedRef<HTMLAudioElement>) => {
   const { audio, volume, handleSliderChange } = props;
-  const { name, src, icon } = audio; 
+  const { name, src, icon } = audio;
 
   const callbackRef = useCallback((node: any) => {
       if (node) {
-        if (typeof ref === 'function') {
-          ref(node);
-        } else {
-          if (ref) {
-            ref.current = node;
-          }
-        }
+        (ref as MutableRefObject<HTMLAudioElement>).current = node;
         node.volume = volume;
       }
   }, [volume]);
