@@ -95,7 +95,7 @@ interface Audio {
 interface Props {
   audio: Audio;
   volume: number;
-  handleSliderChange: (value: number | number[]) => void;
+  handleSliderChange: (value: number) => void;
 }
 
 const AudioSlider = forwardRef(
@@ -125,7 +125,7 @@ const AudioSlider = forwardRef(
         max={1}
         step={0.01}
         value={volume}
-        onChange={handleSliderChange}
+        onChange={value => handleSliderChange(value as number)}
         vertical
       />
       <p>{audioLabel}</p>
