@@ -4,18 +4,18 @@ const VOLUME_CHANGE = 0.1;
 const MAX_VOLUME = 1;
 const MIN_VOLUME = 0;
 
-function useVolume(audios: any, defaultVolume: any) {
+function useVolume(audios: object[], defaultVolume: number) {
   const [volumes, setVolumes] = useState(audios.map(() => defaultVolume));
 
-  function handleVolumeChange(value: any, index: any) {
-    setVolumes((prevVolumes: any) => {
-      return prevVolumes.map((prevVolume: any, i: any) => (i === index ? value : prevVolume))
+  function handleVolumeChange(value: number, index: number) {
+    setVolumes((prevVolumes) => {
+      return prevVolumes.map((prevVolume, i: number) => (i === index ? value : prevVolume))
     });
   }
 
   function increaseVolumes() {
-    setVolumes((prevVolumes: any) => {
-      return prevVolumes.map((prevVolume: any) => {
+    setVolumes((prevVolumes) => {
+      return prevVolumes.map((prevVolume) => {
         const increasedVolume = prevVolume + VOLUME_CHANGE;
         return increasedVolume <= MAX_VOLUME ? increasedVolume : MAX_VOLUME;
       });
@@ -23,8 +23,8 @@ function useVolume(audios: any, defaultVolume: any) {
   }
 
   function decreaseVolumes() {
-    setVolumes((prevVolumes: any) => {
-      return prevVolumes.map((prevVolume: any) => {
+    setVolumes((prevVolumes) => {
+      return prevVolumes.map((prevVolume) => {
         const decreasedVolume = prevVolume - VOLUME_CHANGE;
         return decreasedVolume >= MIN_VOLUME ? decreasedVolume : MIN_VOLUME;
       });

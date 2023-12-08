@@ -61,7 +61,7 @@ function App() {
             audio={audio}
             ref={audioRefs[index]}
             volume={volumes[index]}
-            handleSliderChange={(value: any) => handleVolumeChange(value, index)}
+            handleSliderChange={value => handleVolumeChange(value, index)}
           />
         ))}
       </div>

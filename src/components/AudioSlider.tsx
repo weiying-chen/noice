@@ -103,10 +103,10 @@ const AudioSlider = forwardRef(
   const { audio, volume, handleSliderChange } = props;
   const { name, src, icon } = audio;
 
-  const callbackRef = useCallback((node: any) => {
+  const callbackRef = useCallback((node: HTMLAudioElement | null) => {
       if (node) {
-        (ref as MutableRefObject<HTMLAudioElement>).current = node;
         node.volume = volume;
+        (ref as MutableRefObject<HTMLAudioElement>).current = node;
       }
   }, [volume]);
 

@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
 import { fgColor } from '../styles'
+import { MouseEvent } from 'react';
 
-function style(icon: any, big: any) {
+function style(icon: string, big: boolean | undefined) {
   return css`
     background: #f1c9e0;
     border: solid 2px ${fgColor};
@@ -35,12 +36,12 @@ function style(icon: any, big: any) {
 }
 
 interface Props {
-  onClick: () => void;
-  icon: any;
-  big?: boolean;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  icon: string;
+  big?: boolean | undefined;
 }
 
-function Control({ onClick, icon, big }: Props): JSX.Element {
+function Control({ icon, big, onClick }: Props) {
   return (
     <button css={style(icon, big)} onClick={onClick} />
   );
