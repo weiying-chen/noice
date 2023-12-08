@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { css, Global } from '@emotion/react';
 import { fgColor } from './styles';
 import AudioSlider from './components/AudioSlider';
@@ -61,7 +61,7 @@ function App() {
             audio={audio}
             ref={audioRefs[index]}
             volume={volumes[index]}
-            handleSliderChange={(value) => handleVolumeChange(value, index)}
+            handleSliderChange={(value: any) => handleVolumeChange(value, index)}
           />
         ))}
       </div>

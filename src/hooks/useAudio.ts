@@ -1,15 +1,15 @@
 import { useState, useRef } from 'react';
 
-function useAudio(audios) {
+function useAudio(audios: any) {
   const [isPlayingAudio, setIsAudioPlaying] = useState(false);
-  const audioRefs = audios.map(() => useRef(null));
+  const audioRefs = audios.map(() => useRef<HTMLAudioElement>());
 
   function playAudio() {
     if (!isPlayingAudio) {
-      audioRefs.forEach((audioRef) => audioRef.current.play());
+      audioRefs.forEach((audioRef: any) => audioRef.current.play());
       setIsAudioPlaying(true);
     } else {
-      audioRefs.forEach((audioRef) => audioRef.current?.pause());
+      audioRefs.forEach((audioRef: any) => audioRef.current?.pause());
       setIsAudioPlaying(false);
     }
   }

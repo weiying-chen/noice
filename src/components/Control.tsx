@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { fgColor } from '../styles'
 
-function style(icon, big) {
+function style(icon: any, big: any) {
   return css`
     background: #f1c9e0;
     border: solid 2px ${fgColor};
@@ -34,10 +34,16 @@ function style(icon, big) {
   `;
 }
 
-function Control({ index, onClick, icon, big }) {
+interface Props {
+  onClick: () => void;
+  icon: any;
+  big?: boolean;
+}
+
+function Control({ onClick, icon, big }: Props): JSX.Element {
   return (
     <button css={style(icon, big)} onClick={onClick} />
   );
-};
+}
 
 export default Control;

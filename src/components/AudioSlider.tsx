@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { fgColor } from '../styles'
 import Slider from 'rc-slider';
 
-function style(icon) {
+function style(icon: any) {
   return css`
     display: flex;
     flex-direction: column;
@@ -86,20 +86,27 @@ function style(icon) {
   `;
 }
 
-const AudioSlider = forwardRef((props, ref) => {
+const AudioSlider = forwardRef<HTMLAudioElement, any>(
+  (props: any, ref) => {
   const { audio, volume, handleSliderChange } = props;
   const { name, src, icon } = audio; 
 
-  const callbackRef = useCallback((node) => {
-    if (node) {
-      ref.current = node
-      ref.current.volume = volume;
-    }
-  }, [volume])
+  const callbackRef = useCallback((node: any) => {
+      if (node) {
+        if (typeof ref === 'function') {
+          ref(node);
+        } else {
+          if (ref) {
+            ref.current = node;
+          }
+        }
+        node.volume = volume;
+      }
+  }, [volume]);
 
   const audioLabel = volume === 0
     ? name
-    : `${parseInt(volume * 100)}%`;
+    : `${Math.round(volume * 100)}%`;
 
   return (
     <div className="audio" css={style(icon)}>
