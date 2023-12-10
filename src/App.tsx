@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { css, Global } from '@emotion/react';
-import { fgColor } from './styles';
+import { css, Global, ThemeProvider, useTheme } from '@emotion/react';
+import { fgColor, bgColor } from './styles';
 import AudioSlider from './components/AudioSlider';
 import Control from './components/Control';
 import useAudio from './hooks/useAudio';
 import useVolume from './hooks/useVolume';
+import '@fortawesome/fontawesome-free/css/all.css';
 import 'rc-slider/assets/index.css';
 
 const icon = {
@@ -36,54 +37,109 @@ const audios = [
 
 const DEFAULT_VOLUME = 0;
 
-const styles = css`
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+// function styles(isDarkMode) { 
+//   return css`
+//     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
-  body {
-    color: ${fgColor};
-    font-family: 'Nunito', sans-serif;
-    margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+//     body {
+//       background-color: ${isDarkMode ? fgColor : bgColor};
+//       color: ${isDarkMode ? bgColor : fgColor };
+//       font-family: 'Nunito', sans-serif;
+//       margin: 0;
+//       display: flex;
+//       place-items: center;
+//       min-width: 320px;
+//       min-height: 100vh;
+//     }
+
+//     button {
+//       cursor: pointer;
+//     }
+
+//     #root {
+//       max-width: 1280px;
+//       margin: 0 auto;
+//       padding: 2rem;
+//       text-align: center;
+//     }
+
+//     .audios {
+//       display: flex;
+//       justify-content: center;
+//     }
+
+//     .controls {
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       margin: 30px 0 0;
+//     }
+
+//     .dark-mode {
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       margin: 0 0 90px;
+//     }
+//   `;
+// }
+
+const theme = {
+  colors: {
+    primary: 'hotpink'
   }
+}
 
-  button {
-    cursor: pointer;
-  }
+const GlobalStyles = () => {
+  const theme = useTheme()
 
-  #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-  }
+  return (
+    <Global styles={css`
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
-  .audios {
-    display: flex;
-    justify-content: center;
-  }
+      body {
+        background-color: ${theme.colors.primary};
+        color: ${fgColor};
+        font-family: 'Nunito', sans-serif;
+        margin: 0;
+        display: flex;
+        place-items: center;
+        min-width: 320px;
+        min-height: 100vh;
+      }
 
-  .controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 30px 0 0;
-  }
+      button {
+        cursor: pointer;
+      }
 
-  .dark-mode {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 0 90px;
-  }
-`;
+      #root {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 2rem;
+        text-align: center;
+      }
 
-// For some reason `@import "@fortawesome/fontawesome-free/css/all.css";` doesn't work
-const fontAwesome = css`
-  @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
-`
+      .audios {
+        display: flex;
+        justify-content: center;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0 0;
+      }
+
+      .dark-mode {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 90px;
+      }
+    `} />
+  )
+}
 
 function App() {
   const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);
@@ -106,9 +162,9 @@ function App() {
   }
 
   return (
-    <>
-      <Global styles={fontAwesome} />
-      <Global styles={styles} />
+    // TODO: change theme in <ThemeProvider theme={isDarkMode ? theme : theme2}
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
       <div className="dark-mode">
         <Control
           onClick={toggleDarkMode}
@@ -135,7 +191,7 @@ function App() {
         />
         <Control onClick={increaseVolumes} icon={icon.volumeHigh} />
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 
