@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import { css, Global } from '@emotion/react'
 import { fgColor } from '../styles'
 import { MouseEvent } from 'react';
 
@@ -43,7 +43,9 @@ interface Props {
 
 function Control({ icon, big, onClick }: Props) {
   return (
-    <button css={style(icon, big)} onClick={onClick} />
+    <>
+      <button css={style(icon, big)} onClick={onClick} />
+    </>
   );
 }
 

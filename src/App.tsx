@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { css, Global } from '@emotion/react';
 import { fgColor } from './styles';
 import AudioSlider from './components/AudioSlider';
@@ -6,7 +6,6 @@ import Control from './components/Control';
 import useAudio from './hooks/useAudio';
 import useVolume from './hooks/useVolume';
 import 'rc-slider/assets/index.css';
-import './App.css';
 
 const icon = {
   bugs: '\\e4d0',
@@ -21,6 +20,8 @@ const icon = {
   cloudRain: '\\f73d',
   water: '\\f773',
   umbrellaBeach: '\\f5ca',
+  sun: '\\f185',
+  moon: '\\f186',
 };
 
 const audios = [
@@ -36,18 +37,57 @@ const audios = [
 const DEFAULT_VOLUME = 0;
 
 const styles = css`
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
   body {
     color: ${fgColor};
     font-family: 'Nunito', sans-serif;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
   }
 
   button {
     cursor: pointer;
   }
+
+  #root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .audios {
+    display: flex;
+    justify-content: center;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0 0;
+  }
+
+  .dark-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 90px;
+  }
 `;
+
+// For some reason `@import "@fortawesome/fontawesome-free/css/all.css";` doesn't work
+const fontAwesome = css`
+  @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+`
 
 function App() {
   const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const {
     volumes,
@@ -61,9 +101,20 @@ function App() {
     resetVolumes();
   }, []);
 
+  function toggleDarkMode() {
+    setIsDarkMode(prevMode => !prevMode);
+  }
+
   return (
     <>
+      <Global styles={fontAwesome} />
       <Global styles={styles} />
+      <div className="dark-mode">
+        <Control
+          onClick={toggleDarkMode}
+          icon={isDarkMode ? icon.sun : icon.moon}
+        />
+      </div>
       <div className="audios">
         {audios.map((audio, index) => (
           <AudioSlider

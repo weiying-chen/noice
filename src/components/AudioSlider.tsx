@@ -13,7 +13,7 @@ function style(icon: string) {
 
     p {
       font-size: 0.7em;
-      margin: 20px 0;
+      margin: 20px 0 0;
     }
 
     .rc-slider {
