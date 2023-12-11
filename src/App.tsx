@@ -84,9 +84,17 @@ const DEFAULT_VOLUME = 0;
 //   `;
 // }
 
-const theme = {
-  colors: {
-    primary: 'hotpink'
+const darkColorScheme = {
+  color: {
+    fg: '#fff',
+    bg: '#302c37',
+  }
+}
+
+const lightColorScheme = {
+  color: {
+    fg: '#17151a',
+    bg: '#fff',
   }
 }
 
@@ -98,8 +106,8 @@ const GlobalStyles = () => {
       @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
       body {
-        background-color: ${theme.colors.primary};
-        color: ${fgColor};
+        background-color: ${theme.color.bg};
+        color: ${theme.color.fg};
         font-family: 'Nunito', sans-serif;
         margin: 0;
         display: flex;
@@ -162,8 +170,9 @@ function App() {
   }
 
   return (
-    // TODO: change theme in <ThemeProvider theme={isDarkMode ? theme : theme2}
-    <ThemeProvider theme={theme}>
+    <ThemeProvider
+      theme={isDarkMode ? darkColorScheme : lightColorScheme}
+    >
       <GlobalStyles />
       <div className="dark-mode">
         <Control
