@@ -44,17 +44,17 @@ function style(theme: object, icon: string) {
       }
 
       .rc-slider-rail {
-        background-color: #ddd;
+        background-color: ${theme.color.secondary};
       }
 
       .rc-slider-track,
       .rc-slider-tracks {
-        background-color: #bbb;
+        background-color: #808080;
       }
 
       .rc-slider-handle {
-        background-color: #ffb4af;
-        border: solid 2px ${theme.color.fg};
+        background-color: #e2a19c;
+        border: solid 2px ${theme.color.border};
         color: ${theme.color.fg};
         opacity: 1;
         width: 32px;
@@ -63,7 +63,7 @@ function style(theme: object, icon: string) {
         &:hover,
         /* An example is focusing element with Tab */
         &:focus-visible {
-          box-shadow: 0 0 5px #222;
+          box-shadow: 0 0 5px ${theme.color.text};
         }
 
         &::before {
@@ -78,8 +78,8 @@ function style(theme: object, icon: string) {
       }
 
       .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
-        border-color: #222;
-        box-shadow: 0 0 5px #222;
+        border-color: ${theme.color.text};
+        box-shadow: 0 0 5px ${theme.color.text};
       }
     }
   `;

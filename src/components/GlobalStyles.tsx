@@ -9,7 +9,7 @@ function GlobalStyles() {
 
       body {
         background-color: ${theme.color.bg};
-        color: ${theme.color.fg};
+        color: ${theme.color.text};
         font-family: 'Nunito', sans-serif;
         margin: 0;
         display: flex;

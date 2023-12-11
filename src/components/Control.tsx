@@ -3,8 +3,8 @@ import { MouseEvent } from 'react';
 
 function style(theme: object, icon: string, big: boolean | undefined) {
   return css`
-    background: #f1c9e0;
-    border: solid 2px ${theme.color.fg};
+    background: #b899aa;
+    border: solid 2px ${theme.color.border};
     border-radius: 50%;
     color: ${theme.color.fg};
     margin: 0 5px;
@@ -29,7 +29,7 @@ function style(theme: object, icon: string, big: boolean | undefined) {
     &:hover,
     /* An example is focusing element with Tab */
     &:focus-visible {
-      box-shadow: 0 0 5px #222;
+      box-shadow: 0 0 5px ${theme.color.text};
     }
   `;
 }

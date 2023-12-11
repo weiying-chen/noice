@@ -7,7 +7,7 @@ import Control from './components/Control';
 import GlobalStyles from './components/GlobalStyles';
 import useAudio from './hooks/useAudio';
 import useVolume from './hooks/useVolume';
-import { darkColorScheme, lightColorScheme } from './styles';
+import { darkTheme, lightTheme } from './styles';
 
 const icon = {
   bugs: '\\e4d0',
@@ -60,7 +60,7 @@ function App() {
 
   return (
     <ThemeProvider
-      theme={isDarkMode ? darkColorScheme : lightColorScheme}
+      theme={isDarkMode ? darkTheme : lightTheme}
     >
       <GlobalStyles />
       <div className="dark-mode">

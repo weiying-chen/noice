@@ -1,14 +1,21 @@
-export const darkColorScheme = {
+const fg = '#111'; 
+
+export const darkTheme = {
   color: {
-    fg: '#fff',
-    bg: '#302c37',
+    text: '#fff',
+    fg,
+    bg: '#111',
+    border: '#fff',
+    secondary: '#333',
   }
 }
 
-export const lightColorScheme = {
+export const lightTheme = {
   color: {
-    fg: '#17151a',
+    text: '#111',
+    fg,
     bg: '#fff',
+    border: '#111',
+    secondary: '#ccc',
   }
 }
-
