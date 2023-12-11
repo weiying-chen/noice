@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import { css, Global, ThemeProvider, useTheme } from '@emotion/react';
-import { fgColor, bgColor } from './styles';
-import AudioSlider from './components/AudioSlider';
-import Control from './components/Control';
-import useAudio from './hooks/useAudio';
-import useVolume from './hooks/useVolume';
+import { ThemeProvider } from '@emotion/react';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'rc-slider/assets/index.css';
+import AudioSlider from './components/AudioSlider';
+import Control from './components/Control';
+import GlobalStyles from './components/GlobalStyles';
+import useAudio from './hooks/useAudio';
+import useVolume from './hooks/useVolume';
+import { darkColorScheme, lightColorScheme } from './styles';
 
 const icon = {
   bugs: '\\e4d0',
@@ -36,118 +37,6 @@ const audios = [
 ];
 
 const DEFAULT_VOLUME = 0;
-
-// function styles(isDarkMode) { 
-//   return css`
-//     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
-//     body {
-//       background-color: ${isDarkMode ? fgColor : bgColor};
-//       color: ${isDarkMode ? bgColor : fgColor };
-//       font-family: 'Nunito', sans-serif;
-//       margin: 0;
-//       display: flex;
-//       place-items: center;
-//       min-width: 320px;
-//       min-height: 100vh;
-//     }
-
-//     button {
-//       cursor: pointer;
-//     }
-
-//     #root {
-//       max-width: 1280px;
-//       margin: 0 auto;
-//       padding: 2rem;
-//       text-align: center;
-//     }
-
-//     .audios {
-//       display: flex;
-//       justify-content: center;
-//     }
-
-//     .controls {
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-//       margin: 30px 0 0;
-//     }
-
-//     .dark-mode {
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-//       margin: 0 0 90px;
-//     }
-//   `;
-// }
-
-const darkColorScheme = {
-  color: {
-    fg: '#fff',
-    bg: '#302c37',
-  }
-}
-
-const lightColorScheme = {
-  color: {
-    fg: '#17151a',
-    bg: '#fff',
-  }
-}
-
-const GlobalStyles = () => {
-  const theme = useTheme()
-
-  return (
-    <Global styles={css`
-      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
-      body {
-        background-color: ${theme.color.bg};
-        color: ${theme.color.fg};
-        font-family: 'Nunito', sans-serif;
-        margin: 0;
-        display: flex;
-        place-items: center;
-        min-width: 320px;
-        min-height: 100vh;
-      }
-
-      button {
-        cursor: pointer;
-      }
-
-      #root {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 2rem;
-        text-align: center;
-      }
-
-      .audios {
-        display: flex;
-        justify-content: center;
-      }
-
-      .controls {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 30px 0 0;
-      }
-
-      .dark-mode {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0 90px;
-      }
-    `} />
-  )
-}
 
 function App() {
   const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);

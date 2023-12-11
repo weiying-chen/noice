@@ -1,13 +1,12 @@
-import { css, Global } from '@emotion/react'
-import { fgColor } from '../styles'
+import { css, Global, useTheme } from '@emotion/react'
 import { MouseEvent } from 'react';
 
-function style(icon: string, big: boolean | undefined) {
+function style(theme: object, icon: string, big: boolean | undefined) {
   return css`
     background: #f1c9e0;
-    border: solid 2px ${fgColor};
+    border: solid 2px ${theme.color.fg};
     border-radius: 50%;
-    color: ${fgColor};
+    color: ${theme.color.fg};
     margin: 0 5px;
     padding: 0;
     outline: none !important;
@@ -42,10 +41,10 @@ interface Props {
 }
 
 function Control({ icon, big, onClick }: Props) {
+  const theme = useTheme();
+
   return (
-    <>
-      <button css={style(icon, big)} onClick={onClick} />
-    </>
+    <button css={style(theme, icon, big)} onClick={onClick} />
   );
 }
 

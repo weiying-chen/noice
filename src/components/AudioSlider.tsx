@@ -1,9 +1,8 @@
 import { ForwardedRef, MutableRefObject, forwardRef, useCallback, useRef } from 'react';
-import { css } from '@emotion/react'
-import { fgColor } from '../styles'
+import { css, useTheme } from '@emotion/react'
 import Slider from 'rc-slider';
 
-function style(icon: string) {
+function style(theme: object, icon: string) {
   return css`
     display: flex;
     flex-direction: column;
@@ -55,8 +54,8 @@ function style(icon: string) {
 
       .rc-slider-handle {
         background-color: #ffb4af;
-        border: solid 2px ${fgColor};
-        color: ${fgColor};
+        border: solid 2px ${theme.color.fg};
+        color: ${theme.color.fg};
         opacity: 1;
         width: 32px;
         height: 32px;
@@ -101,7 +100,6 @@ interface Props {
 const AudioSlider = forwardRef(
   (props: Props, ref: ForwardedRef<HTMLAudioElement>) => {
   const { audio, volume, handleSliderChange } = props;
-  const { name, src, icon } = audio;
 
   const callbackRef = useCallback((node: HTMLAudioElement | null) => {
       if (node) {
@@ -110,12 +108,16 @@ const AudioSlider = forwardRef(
       }
   }, [volume]);
 
+  const { name, src, icon } = audio;
+
   const audioLabel = volume === 0
     ? name
     : `${Math.round(volume * 100)}%`;
 
+  const theme = useTheme();
+
   return (
-    <div className="audio" css={style(icon)}>
+    <div className="audio" css={style(theme, icon)}>
       <audio ref={callbackRef} loop>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
