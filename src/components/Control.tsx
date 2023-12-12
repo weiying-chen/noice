@@ -35,7 +35,8 @@ function style(theme: Theme, icon: string, big: boolean | undefined) {
 
     /* An example is focusing element with Tab */
     &:focus-visible {
-      box-shadow: 0 0 5px ${theme.color.text};
+      // box-shadow: 0 0 5px ${theme.color.text};
+      box-shadow: none;
     }
   `;
 }
