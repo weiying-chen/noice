@@ -1,8 +1,6 @@
 import { css, Global, useTheme, Theme } from '@emotion/react';
-import { icon } from '../constants'
-import { Icon } from '../types';
 
-function styles(theme: Theme, icon: Icon) {
+function styles(theme: Theme, icon: string) {
   return css`
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
@@ -48,7 +46,7 @@ function styles(theme: Theme, icon: Icon) {
         &::before {
           /* \`transform: rotate()\` won't work without \`display: inline-block\` */
           display: inline-block;
-          content: "${icon.gaugeSimple}";
+          content: "${icon}";
           font-family: "Font Awesome 5 Free";
           font-weight: 900;
           margin: 0 5px 0 0;
@@ -89,7 +87,11 @@ function styles(theme: Theme, icon: Icon) {
   `;
 }
 
-function GlobalStyles() {
+interface Props {
+  icon: string
+}
+
+function GlobalStyles({ icon }: Props) {
   const theme = useTheme();
   return <Global styles={styles(theme, icon)} />;
 }

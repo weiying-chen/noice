@@ -36,7 +36,7 @@ function App() {
     <ThemeProvider
       theme={isDarkMode ? darkTheme : lightTheme}
     >
-      <GlobalStyles />
+      <GlobalStyles icon={icon.gaugeSimple} />
       <div className="app-name">
         <h1>Noice</h1>
       </div>

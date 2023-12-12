@@ -1,11 +1,7 @@
-import { Theme as EmotionTheme } from '@emotion/react';
-
-export interface Icon {
-  [key: string]: string;
-}
+import '@emotion/react'
 
 declare module '@emotion/react' {
-  export interface Theme extends EmotionTheme {
+  export interface Theme {
     color: {
       text: string,
       fg: string,
