@@ -26,7 +26,13 @@ function style(theme: Theme, icon: string, big: boolean | undefined) {
       transform: translate(-50%, -50%);
     }
 
-    &:hover,
+    /* This prevents the sticky hover on mobile */
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        box-shadow: 0 0 5px ${theme.color.text};
+      }
+    }
+
     /* An example is focusing element with Tab */
     &:focus-visible {
       box-shadow: 0 0 5px ${theme.color.text};
