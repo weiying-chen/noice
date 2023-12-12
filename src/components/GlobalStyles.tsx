@@ -36,7 +36,6 @@ function styles(theme, icon) {
     }
 
     .app-name {
-      margin: 0 0 190px;
       position: fixed;
       top: 20px;
       left: 50%;
@@ -48,13 +47,20 @@ function styles(theme, icon) {
         &::before {
           /* \`transform: rotate()\` won't work without \`display: inline-block\` */
           display: inline-block;
-          content: "${icon.circlePlay}";
+          content: "${icon.gaugeSimple}";
           font-family: "Font Awesome 5 Free";
-          font-weight: 400;
-          margin: 0 3px 0 0;
-          transform: rotate(-90deg);
+          font-weight: 900;
+          margin: 0 5px 0 0;
+          transform: rotate(180deg);
         }
       }
+    }
+
+    .dark-mode {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 0 60px;
     }
 
     .audios {
@@ -69,15 +75,11 @@ function styles(theme, icon) {
       margin: 30px 0 0;
     }
 
-    .dark-mode {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 0 60px;
-    }
-
     .made-by {
-      margin: 60px 0 0;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
 
       p {
         font-size: 0.7em;        

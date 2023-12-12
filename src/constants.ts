@@ -13,7 +13,8 @@ export const icon = {
   umbrellaBeach: '\\f5ca',
   sun: '\\f185',
   moon: '\\f186',
-  circlePlay: "\\f144",
+  circlePlay: '\\f144',
+  gaugeSimple: '\\f629',
 };
 
 export const audios = [
