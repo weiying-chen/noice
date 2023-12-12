@@ -49,7 +49,7 @@ function style(theme: object, icon: string) {
 
       .rc-slider-track,
       .rc-slider-tracks {
-        background-color: #808080;
+        background-color: #919191;
       }
 
       .rc-slider-handle {
@@ -78,7 +78,6 @@ function style(theme: object, icon: string) {
       }
 
       .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
-        border-color: ${theme.color.text};
         box-shadow: 0 0 5px ${theme.color.text};
       }
     }

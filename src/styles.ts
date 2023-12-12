@@ -4,9 +4,9 @@ export const darkTheme = {
   color: {
     text: '#fff',
     fg,
-    bg: '#111',
-    border: '#fff',
-    secondary: '#333',
+    bg: '#333',
+    border: '#111',
+    secondary: '#555',
   }
 }
 
