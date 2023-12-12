@@ -3,7 +3,7 @@ import { MouseEvent } from 'react';
 
 function style(theme: Theme, icon: string, big: boolean | undefined) {
   return css`
-    background: #b899aa;
+    background: #d5b1c5;
     border: solid 2px ${theme.color.border};
     border-radius: 50%;
     color: ${theme.color.fg};
@@ -26,17 +26,18 @@ function style(theme: Theme, icon: string, big: boolean | undefined) {
       transform: translate(-50%, -50%);
     }
 
-    /* This prevents the sticky hover on mobile */
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        box-shadow: 0 0 5px ${theme.color.text};
-      }
+    /* The focus gets stuck on mobile */
+    &:focus-visible {
+      box-shadow: none;
     }
 
-    /* An example is focusing element with Tab */
-    &:focus-visible {
-      // box-shadow: 0 0 5px ${theme.color.text};
-      box-shadow: none;
+    /* This prevents the sticky hover on mobile */
+    @media (hover: hover) and (pointer: fine) {
+      &:hover,
+      /* An example is focusing element with Tab */
+      &:focus-visible {
+        box-shadow: 0 0 5px ${theme.color.text};
+      }
     }
   `;
 }

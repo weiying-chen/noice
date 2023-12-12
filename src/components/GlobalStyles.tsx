@@ -12,7 +12,7 @@ function styles(theme: Theme, icon: string) {
       display: flex;
       place-items: center;
       min-width: 320px;
-      min-height: 100vh;
+      min-height: 100dvh;
     }
 
     h1 {
@@ -35,7 +35,7 @@ function styles(theme: Theme, icon: string) {
     }
 
     .app-name {
-      position: fixed;
+      position: absolute;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
@@ -75,7 +75,7 @@ function styles(theme: Theme, icon: string) {
     }
 
     .made-by {
-      position: fixed;
+      position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
