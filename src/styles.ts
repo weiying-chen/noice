@@ -1,11 +1,12 @@
 const fg = '#111'; 
+const border = '#111';
 
 export const darkTheme = {
   color: {
     text: '#fff',
     fg,
     bg: '#333',
-    border: '#111',
+    border,
     secondary: '#555',
   }
 }
@@ -15,7 +16,7 @@ export const lightTheme = {
     text: '#111',
     fg,
     bg: '#fff',
-    border: '#111',
+    border,
     secondary: '#ccc',
   }
 }
