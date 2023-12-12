@@ -1,8 +1,8 @@
-import { ForwardedRef, MutableRefObject, forwardRef, useCallback, useRef } from 'react';
-import { css, useTheme } from '@emotion/react'
+import { ForwardedRef, MutableRefObject, forwardRef, useCallback } from 'react';
+import { css, useTheme, Theme } from '@emotion/react'
 import Slider from 'rc-slider';
 
-function style(theme: object, icon: string) {
+function style(theme: Theme, icon: string) {
   return css`
     display: flex;
     flex-direction: column;

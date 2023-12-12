@@ -1,7 +1,8 @@
-import { css, Global, useTheme } from '@emotion/react';
+import { css, Global, useTheme, Theme } from '@emotion/react';
 import { icon } from '../constants'
+import { Icon } from '../types';
 
-function styles(theme, icon) {
+function styles(theme: Theme, icon: Icon) {
   return css`
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 

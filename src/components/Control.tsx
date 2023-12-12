@@ -1,7 +1,6 @@
-import { css, Global, useTheme } from '@emotion/react'
+import { css, useTheme, Theme } from '@emotion/react'
 import { MouseEvent } from 'react';
-
-function style(theme: object, icon: string, big: boolean | undefined) {
+function style(theme: Theme, icon: string, big: boolean | undefined) {
   return css`
     background: #b899aa;
     border: solid 2px ${theme.color.border};
