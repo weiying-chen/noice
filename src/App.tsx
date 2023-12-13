@@ -3,7 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'rc-slider/assets/index.css';
 import { DEFAULT_VOLUME } from './constants'
-import { audios } from './constants'
+import { audios as allAudios } from './constants'
 import { icon } from './constants'
 import AudioSlider from './components/AudioSlider';
 import Control from './components/Control';
@@ -11,6 +11,13 @@ import GlobalStyles from './components/GlobalStyles';
 import useAudio from './hooks/useAudio';
 import useVolume from './hooks/useVolume';
 import { darkTheme, lightTheme } from './styles';
+
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+const MOBILE_AUDIOS = 5;
+const audios = isMobile() ? allAudios.slice(0, MOBILE_AUDIOS) : allAudios;
 
 function App() {
   const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);
