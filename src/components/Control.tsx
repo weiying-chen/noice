@@ -3,7 +3,7 @@ import { MouseEvent } from 'react';
 
 function style(theme: Theme, icon: string, big: boolean | undefined) {
   return css`
-    background: #d5b1c5;
+    background: #b899aa;
     border: solid 2px ${theme.color.border};
     border-radius: 50%;
     color: ${theme.color.fg};

@@ -125,7 +125,7 @@ const AudioSlider = forwardRef(
 
   return (
     <div className="audio" css={style(theme, icon)}>
-      <audio ref={callbackRef} loop>
+      <audio ref={callbackRef} preload="auto" loop>
         <source src={src} type="audio/mpeg" /> Your browser does
         not support the audio element.
       </audio>
