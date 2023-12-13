@@ -3,7 +3,7 @@ import { MouseEvent } from 'react';
 
 function style(theme: Theme, icon: string, big: boolean | undefined) {
   return css`
-    background: #b899aa;
+    background: #d5b1c5;
     border: solid 2px ${theme.color.border};
     border-radius: 50%;
     color: ${theme.color.fg};
@@ -29,6 +29,11 @@ function style(theme: Theme, icon: string, big: boolean | undefined) {
     /* The focus gets stuck on mobile */
     &:focus-visible {
       box-shadow: none;
+    }
+
+    /* This is the tapped state on mobile */
+    &:active {
+      box-shadow: 0 0 5px ${theme.color.text};
     }
 
     /* This prevents the sticky hover on mobile */

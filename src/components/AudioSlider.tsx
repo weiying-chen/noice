@@ -65,6 +65,11 @@ function style(theme: Theme, icon: string) {
           box-shadow: none;
         }
 
+        /* This is the tapped state on mobile */
+        &:active {
+          box-shadow: 0 0 5px ${theme.color.text};
+        }
+
         /* This prevents the sticky hover on mobile */
         @media (hover: hover) and (pointer: fine) {
           &:hover,

@@ -19,6 +19,14 @@ function styles(theme: Theme, icon: string) {
       font-size: 1.4em;
     }
 
+    input,
+    textarea,
+    button,
+    select,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
     a {
       color: ${theme.color.text};
     }
