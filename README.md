@@ -14,9 +14,9 @@ npm install
 # Usage
 
 ```bash
-# Build the app
-npm run build
-
-# Develop the app
+# Run app
 npm run dev
+
+# Build app
+npm run build
 ```
