@@ -2,7 +2,7 @@
 
 Nice background noises
 
-![](https://github.com/weiying-chen/typerlink/blob/main/demo.gif)
+![](https://github.com/weiying-chen/noice/blob/main/screenshot.png)
 
 ## Installation
 
