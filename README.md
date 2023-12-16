@@ -11,7 +11,7 @@ Nice background noises
 npm install
 ```
 
-# Usage
+## Usage
 
 ```bash
 # Run app
