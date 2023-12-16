@@ -74,7 +74,7 @@ function App() {
         <Control onClick={increaseVolumes} icon={icon.volumeHigh} />
       </div>
       <div className="made-by">
-        <p>Crafted by <a href="mailto:alexandrochen.com@gmail.com">Alexandro Chen</a></p>
+        <p>Crafted by <a href="mailto:alexandrochen.com@gmail.com">Wei-Ying Chen</a></p>
       </div>
     </ThemeProvider>
   );
