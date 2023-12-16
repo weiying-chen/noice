@@ -4,6 +4,8 @@ Nice background noises
 
 ![](https://github.com/weiying-chen/noice/blob/main/screenshot.png)
 
+**[Live Demo](https://noice-demo.vercel.app/)**
+
 ## Installation
 
 ```bash
