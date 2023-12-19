@@ -114,9 +114,13 @@ const AudioSlider = forwardRef(
   const { audio, volume, handleSliderChange } = props;
 
   const callbackRef = useCallback((node: HTMLAudioElement | null) => {
-      if (node) {
+      if (!node) return;
+      
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
         node.volume = volume;
-        (ref as MutableRefObject<HTMLAudioElement>).current = node;
+        ref.current = node;
       }
   }, [volume]);
 
@@ -139,7 +143,8 @@ const AudioSlider = forwardRef(
         max={1}
         step={0.01}
         value={volume}
-        onChange={value => handleSliderChange(value as number)}
+        // `value` could be a `number[]`
+        onChange={value => handleSliderChange(typeof value === "number" ? value : 0)}
         vertical
       />
       <p>{audioLabel}</p>

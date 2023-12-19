@@ -28,4 +28,4 @@ export const audios = [
 ];
 
 export const DEFAULT_VOLUME = 0;
-
+export const MOBILE_AUDIOS = 5;
