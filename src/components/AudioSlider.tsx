@@ -1,4 +1,4 @@
-import { ForwardedRef, MutableRefObject, forwardRef, useCallback } from 'react';
+import { ForwardedRef, forwardRef, useCallback } from 'react';
 import { css, useTheme, Theme } from '@emotion/react'
 import Slider from 'rc-slider';
 
