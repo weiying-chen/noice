@@ -24,15 +24,39 @@ function App() {
 
   const {
     volumes,
+    setVolumes,
     handleVolumeChange,
     increaseVolumes,
     decreaseVolumes,
     resetVolumes,
   } = useVolume(audios, DEFAULT_VOLUME);
 
+  const [isLoadedFromLocalStorage, setIsLoadedFromLocalStorage] = useState(false);
+
+  // useEffect to load volumes from localStorage or set to default
   useEffect(() => {
-    resetVolumes();
+    const savedVolumes = localStorage.getItem('volumes');
+
+    if (savedVolumes) {
+      try {
+        const parsedVolumes = JSON.parse(savedVolumes);
+        setVolumes(parsedVolumes);
+      } catch (error) {
+        console.error("Error parsing volumes from localStorage:", error);
+        resetVolumes();
+      }
+    } else {
+      resetVolumes();
+    }
+    setIsLoadedFromLocalStorage(true);  // Set the flag to true after loading data
   }, []);
+
+  // useEffect to save volumes to localStorage whenever they change
+  useEffect(() => {
+    if (isLoadedFromLocalStorage) {
+      localStorage.setItem('volumes', JSON.stringify(volumes));
+    }
+  }, [volumes]); // Dependency on volumes
 
   function toggleDarkMode() {
     setIsDarkMode(prevMode => !prevMode);

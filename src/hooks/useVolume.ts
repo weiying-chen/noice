@@ -37,6 +37,7 @@ function useVolume(audios: object[], defaultVolume: number) {
 
   return {
     volumes,
+    setVolumes,
     handleVolumeChange,
     increaseVolumes,
     decreaseVolumes,
