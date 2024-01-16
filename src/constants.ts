@@ -29,3 +29,4 @@ export const audios = [
 
 export const DEFAULT_VOLUME = 0;
 export const MOBILE_AUDIOS = 5;
+export const LOCAL_STORAGE_KEY = 'dark-mode';

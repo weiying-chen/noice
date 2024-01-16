@@ -9,6 +9,7 @@ function useVolume(audios: object[], defaultVolume: number) {
   const [volumes, setVolumes] = useState(() => {
     const storedVolumes = localStorage.getItem(LOCAL_STORAGE_KEY);
     const defaultVolumes = audios.map(() => defaultVolume);
+
     return JSON.parse(storedVolumes ?? JSON.stringify(defaultVolumes));
   });
 

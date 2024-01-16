@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'rc-slider/assets/index.css';
-import { DEFAULT_VOLUME, MOBILE_AUDIOS } from './constants'
+import { DEFAULT_VOLUME, MOBILE_AUDIOS, LOCAL_STORAGE_KEY } from './constants'
 import { audios as allAudios } from './constants'
 import { icon } from './constants'
 import AudioSlider from './components/AudioSlider';
@@ -20,7 +20,11 @@ const audios = isMobile() ? allAudios.slice(0, MOBILE_AUDIOS) : allAudios;
 
 function App() {
   const { audioRefs, isPlayingAudio, playAudio } = useAudio(audios);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    const storedIsDarkMode = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+    return JSON.parse(storedIsDarkMode ?? JSON.stringify(false));
+  });
 
   const {
     volumes,
@@ -30,7 +34,13 @@ function App() {
   } = useVolume(audios, DEFAULT_VOLUME);
 
   function toggleDarkMode() {
-    setIsDarkMode(prevMode => !prevMode);
+    setIsDarkMode(prevIsDarkMode => {
+      const newIsDarkMode = !prevIsDarkMode;
+
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newIsDarkMode));
+
+      return newIsDarkMode;
+    });
   }
 
   return (
