@@ -1,17 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from 'react';
+
+function initStoredValue<T>(key: string, fallback: T): T {
+  const item = window.localStorage.getItem(key);
+
+  if (item !== null) {
+    try {
+      return JSON.parse(item) as T;
+    } catch (error) {
+      console.error('Error parsing localStorage item:', key);
+    }
+  }
+
+  window.localStorage.setItem(key, JSON.stringify(fallback));
+
+  return fallback;
+}
 
 const useLocalStorage = <T>(storageKey: string, fallbackState: T): [T, React.Dispatch<React.SetStateAction<T>>] => {
-  const [value, setValue] = useState<T>(() => {
-    const item = localStorage.getItem(storageKey);
+  const [storedValue, setStoredValue] = useState<T>(() => initStoredValue(storageKey, fallbackState));
 
-    return item ? JSON.parse(item) : fallbackState;
-  });
+  const setValue: React.Dispatch<React.SetStateAction<T>> = (value) => {
+    try {
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
 
-  useEffect(() => {
-    localStorage.setItem(storageKey, JSON.stringify(value));
-  }, [value, storageKey]);
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(storageKey, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error('Error setting localStorage key:', storageKey);
+    }
+  };
 
-  return [value, setValue];
+  return [storedValue, setValue];
 };
 
 export default useLocalStorage;
