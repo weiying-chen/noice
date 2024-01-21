@@ -16,7 +16,13 @@ function useVolume(audios: object[], defaultVolume: number) {
 
   function increaseVolumes() {
     setVolumes(
-      volumes.map(volume => Math.min(volume + VOLUME_CHANGE, MAX_VOLUME))
+      volumes.map(volume => {
+        if (volume === 0) {
+          return volume;
+        } else {
+          return Math.min(volume + VOLUME_CHANGE, MAX_VOLUME);
+        }
+      })
     );
   }
 
